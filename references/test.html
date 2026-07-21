@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Associations — Le Tableau</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
+
+:root{
+  --orange:#FF4B1F;
+  --orange-dark:#D93A11;
+  --ink:#170D02;
+  --navy:#121B3E;
+  --navy-2:#1B2650;
+  --paper:#FFF6E9;
+  --paper-dim:#E9DEC7;
+  --font-display:'Bricolage Grotesque', sans-serif;
+  --font-body:'IBM Plex Sans', sans-serif;
+  --font-mono:'IBM Plex Mono', monospace;
+}
+
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{ font-family:var(--font-body); color:var(--ink); background:var(--paper); -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+a{color:inherit;}
+button{font-family:inherit;}
+
+.wrap{ max-width:1180px; margin:0 auto; padding:0 clamp(20px,5vw,56px); }
+
+.eyebrow{ font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.18em; text-transform:uppercase; font-weight:500; }
+
+h1,h2{ font-family:var(--font-display); font-weight:800; letter-spacing:-0.02em; line-height:0.98; text-transform:uppercase; }
+
+::selection{ background:var(--ink); color:var(--paper); }
+:focus-visible{ outline:3px solid var(--ink); outline-offset:3px; }
+
+/* ---------- NAV ---------- */
+.nav{ position:sticky; top:0; z-index:50; background:var(--orange); border-bottom:2px solid var(--ink); }
+.nav .wrap{ display:flex; align-items:center; justify-content:space-between; padding-top:16px; padding-bottom:16px; gap:16px; flex-wrap:wrap; }
+.brand{ display:flex; align-items:center; gap:10px; font-family:var(--font-display); font-weight:800; font-size:1.15rem; text-transform:uppercase; letter-spacing:-0.01em; text-decoration:none; }
+.brand-mark{ width:22px; height:22px; background:var(--ink); position:relative; flex:none; }
+.brand-mark::after{ content:""; position:absolute; inset:5px; background:var(--orange); }
+.nav-right{ display:flex; align-items:center; gap:18px; flex-wrap:wrap; }
+.nav-link{ font-family:var(--font-mono); font-size:0.8rem; letter-spacing:0.04em; text-decoration:none; border-bottom:2px solid var(--ink); padding-bottom:2px; }
+.clock{ font-family:var(--font-mono); font-size:0.85rem; letter-spacing:0.05em; background:var(--ink); color:var(--orange); padding:7px 12px; border:1px solid var(--ink); white-space:nowrap; }
+.clock::before{ content:"\25CF "; color:var(--orange); }
+
+/* ---------- PAGE HEADER ---------- */
+.page-header{ background:var(--orange); padding:clamp(40px,7vw,72px) 0 0; }
+.page-header .eyebrow{ color:var(--ink); opacity:.75; }
+.page-header h1{ font-size:clamp(2.1rem,5vw,3.6rem); margin-top:10px; max-width:20ch; }
+.page-header .lead{ margin-top:16px; max-width:56ch; font-size:1.05rem; line-height:1.5; }
+
+/* ---------- PUNCH (losanges) ---------- */
+.punch{ width:100%; --a:var(--orange); --b:var(--paper); position:relative; overflow:hidden; margin-top:36px; height:26px; background-color:var(--a); }
+.punch::before{
+  content:""; position:absolute; inset:0; background-color:var(--b);
+  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26'%3E%3Cpolygon points='13,4 22,13 13,22 4,13' fill='none' stroke='white' stroke-width='2.5'/%3E%3C/svg%3E");
+  mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26'%3E%3Cpolygon points='13,4 22,13 13,22 4,13' fill='none' stroke='white' stroke-width='2.5'/%3E%3C/svg%3E");
+  -webkit-mask-repeat:repeat; mask-repeat:repeat;
+  -webkit-mask-size:26px 26px; mask-size:26px 26px;
+}
+
+/* ---------- JUMP NAV ---------- */
+.jumpnav{ padding:28px 0; display:flex; flex-wrap:wrap; gap:8px; }
+.jumpnav a{
+  border:2px solid var(--ink); background:transparent; color:var(--ink);
+  font-family:var(--font-mono); font-size:0.75rem; letter-spacing:0.05em; text-transform:uppercase;
+  padding:8px 14px; text-decoration:none;
+}
+.jumpnav a:hover{ background:var(--ink); color:var(--paper); }
+
+/* ---------- ASSOCIATION SECTIONS ---------- */
+.asso-section{ border-top:1px solid rgba(23,13,2,0.1); }
+.asso-section:nth-child(even){ background:var(--paper-dim); }
+.asso-row{
+  display:grid; grid-template-columns:300px 1fr; gap:clamp(28px,5vw,56px);
+  padding:clamp(40px,6vw,64px) 0;
+}
+.asso-badge{
+  width:84px; height:84px; display:flex; align-items:center; justify-content:center;
+  font-family:var(--font-mono); font-weight:600; font-size:1.35rem; letter-spacing:0.01em;
+  border:2px solid var(--ink); margin-bottom:18px;
+}
+.badge-orange{ background:var(--orange); color:var(--ink); }
+.badge-navy{ background:var(--navy); color:var(--paper); }
+.badge-ink{ background:var(--ink); color:var(--orange); }
+
+.asso-identity .eyebrow{ color:var(--orange-dark); margin-bottom:8px; }
+.asso-identity h2{ font-size:clamp(1.5rem,3vw,2.1rem); text-transform:none; letter-spacing:-0.01em; margin-bottom:12px; }
+.asso-desc{ font-size:1rem; line-height:1.55; max-width:38ch; color:#3a2e21; margin-bottom:14px; }
+.asso-meta{ font-family:var(--font-mono); font-size:0.75rem; letter-spacing:0.03em; text-transform:uppercase; opacity:.55; }
+
+.events-label{
+  font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase;
+  opacity:.55; margin-bottom:16px;
+}
+.events-row{ display:flex; flex-wrap:wrap; gap:18px; }
+
+/* ---------- EVENT CARD (repris de la page evenements) ---------- */
+.event-card{
+  flex:none; width:250px;
+  border:2px solid var(--ink); background:var(--paper); display:flex; flex-direction:column;
+}
+.event-card .card-image{ position:relative; height:130px; overflow:hidden; border-bottom:2px solid var(--ink); }
+.event-card .card-image svg{ width:100%; height:100%; display:block; }
+.event-card .card-tag{
+  position:absolute; top:8px; font-family:var(--font-mono); font-size:0.64rem; letter-spacing:0.06em; text-transform:uppercase;
+  padding:4px 8px;
+}
+.event-card .card-tag.date-tag{ left:8px; background:var(--ink); color:var(--paper); }
+.event-card .card-tag.cat-tag{ right:8px; background:var(--paper); color:var(--ink); border:1px solid var(--ink); }
+.event-card .card-body{ padding:12px 14px 14px; display:flex; flex-direction:column; gap:7px; flex:1; }
+.event-card h4{ font-family:var(--font-display); font-weight:800; font-size:1rem; text-transform:none; letter-spacing:-0.01em; line-height:1.15; }
+.event-card .card-meta{ font-family:var(--font-mono); font-size:0.7rem; letter-spacing:0.03em; text-transform:uppercase; opacity:.6; }
+.card-more{
+  align-self:flex-start; border:none; background:transparent; color:var(--orange-dark);
+  font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.04em; text-transform:uppercase; cursor:pointer;
+  padding:0 0 2px; border-bottom:2px solid var(--orange-dark);
+}
+.card-more:hover{ color:var(--ink); border-color:var(--ink); }
+.event-card .card-status{ display:flex; align-items:center; gap:6px; font-family:var(--font-mono); font-size:0.72rem; margin-top:auto; padding-top:4px; }
+.event-card .card-status.dim{ opacity:.55; }
+.event-card .status-dot{ width:9px; height:9px; flex:none; border:1.5px solid var(--orange-dark); }
+.event-card .status-dot.filled{ background:var(--orange-dark); border-color:var(--orange-dark); }
+.event-card .status-dot.dim{ border-color:rgba(23,13,2,0.25); background:transparent; }
+
+/* ---------- MODAL ---------- */
+.modal-overlay{ position:fixed; inset:0; background:rgba(23,13,2,0.72); z-index:100; display:flex; align-items:center; justify-content:center; padding:24px; }
+.modal-overlay[hidden]{ display:none; }
+.modal-card{ background:var(--paper); border:2px solid var(--ink); max-width:560px; width:100%; max-height:88vh; overflow-y:auto; position:relative; }
+.modal-close{ position:absolute; top:12px; right:12px; z-index:2; width:36px; height:36px; border:2px solid var(--ink); background:var(--paper); color:var(--ink); cursor:pointer; font-size:1rem; }
+.modal-close:hover{ background:var(--ink); color:var(--paper); }
+.modal-image{ height:210px; border-bottom:2px solid var(--ink); }
+.modal-image svg{ width:100%; height:100%; display:block; }
+.modal-body{ padding:24px clamp(20px,4vw,32px) 28px; display:flex; flex-direction:column; gap:12px; }
+.modal-tags{ display:flex; gap:8px; }
+.modal-tag{ font-family:var(--font-mono); font-size:0.7rem; letter-spacing:0.05em; text-transform:uppercase; padding:5px 10px; }
+.modal-tag.date{ background:var(--ink); color:var(--paper); }
+.modal-tag.cat{ background:transparent; border:1px solid var(--ink); color:var(--ink); }
+.modal-body h3{ font-size:clamp(1.4rem,3.6vw,2rem); font-family:var(--font-display); font-weight:800; text-transform:none; letter-spacing:-0.01em; }
+.modal-meta{ font-family:var(--font-mono); font-size:0.8rem; letter-spacing:0.03em; text-transform:uppercase; opacity:.65; }
+.modal-desc{ font-size:1rem; line-height:1.6; color:#3a2e21; }
+.modal-status{ display:flex; align-items:center; gap:8px; font-family:var(--font-mono); font-size:0.85rem; padding-top:12px; border-top:1px solid var(--paper-dim); margin-top:4px; }
+.modal-status .status-dot{ width:9px; height:9px; flex:none; border:1.5px solid var(--orange-dark); }
+.modal-status .status-dot.filled{ background:var(--orange-dark); border-color:var(--orange-dark); }
+.modal-status .status-dot.dim{ border-color:rgba(23,13,2,0.25); background:transparent; }
+
+/* ---------- FOOTER ---------- */
+footer{ background:var(--ink); color:var(--paper); border-top:1px solid rgba(255,246,233,0.15); }
+footer .wrap{ padding:26px clamp(20px,5vw,56px); display:flex; flex-wrap:wrap; gap:12px; justify-content:space-between; align-items:center; font-family:var(--font-mono); font-size:0.78rem; opacity:.7; }
+footer a{ text-decoration:none; opacity:.9; }
+footer a:hover{ text-decoration:underline; }
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width:800px){
+  .asso-row{ grid-template-columns:1fr; gap:24px; }
+}
+@media (max-width:560px){
+  .event-card{ width:100%; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="le-tableau.html"><span class="brand-mark"></span>Le Tableau</a>
+    <div class="nav-right">
+      <a class="nav-link" href="le-tableau.html">Accueil</a>
+      <a class="nav-link" href="evenements.html">Événements</a>
+      <div class="clock" id="clock">--:--:--</div>
+    </div>
+  </div>
+</nav>
+
+<header class="page-header">
+  <div class="wrap">
+    <p class="eyebrow">Le Tableau — associations</p>
+    <h1>Huit assos, un seul tableau</h1>
+    <p class="lead">Qui elles sont, ce qu'elles font, et ce qu'il ne faut pas rater cette année. Clique sur un nom pour y aller directement.</p>
+  </div>
+  <div class="punch"></div>
+</header>
+
+<div class="jumpnav wrap">
+  <a href="#bde">BDE</a>
+  <a href="#bds">BDS</a>
+  <a href="#je">Junior-Entreprise</a>
+  <a href="#bda">BDA</a>
+  <a href="#cr">Club Robotique</a>
+  <a href="#ci">Club Info</a>
+  <a href="#ah">Asso Humanitaire</a>
+  <a href="#ff">Fanfare</a>
+</div>
+
+<main>
+
+<section class="asso-section" id="bde">
+  <div class="asso-row wrap">
+    <div class="asso-identity">
+      <div class="asso-badge badge-orange">BDE</div>
+      <p class="eyebrow">Vie étudiante</p>
+      <h2>Bureau Des Élèves</h2>
+      <p class="asso-desc">Le cœur de la vie étudiante : organise les soirées, le gala et le weekend d'intégration, et représente les élèves auprès de l'administration.</p>
+      <p class="asso-meta">Depuis 1987 · ~40 membres actifs</p>
+    </div>
+    <div class="asso-events">
+      <p class="events-label">Ses événements forts</p>
+      <div class="events-row" id="events-bde"></div>
+    </div>
+  </div>
+</section>
+
+<section class="asso-section" id="bds">
+  <div class="asso-row wrap">
+    <div class="asso-identity">
+      <div class="asso-badge badge-navy">BDS</div>
+      <p class="eyebrow">Sport</p>
+      <h2>Bureau Des Sports</h2>
+      <p class="asso-desc">Coordonne les équipes sportives de l'école et organise les tournois, de la rentrée jusqu'aux compétitions inter-écoles.</p>
+      <p class="asso-meta">Depuis 1990 · ~35 membres actifs</p>
+    </div>
+    <div class="asso-events">
+      <p class="events-label">Ses événements forts</p>
+      <div class="events-row" id="events-bds"></div>
+    </div>
+  </div>
+</section>
+
+<section class="asso-section" id="je">
+  <div class="asso-row wrap">
+    <div class="asso-identity">
+      <div class="asso-badge badge-ink">JE</div>
+      <p class="eyebrow">Professionnel</p>
+      <h2>Junior-Entreprise</h2>
+      <p class="asso-desc">Mène de vraies missions de conseil pour des entreprises, et organise le Forum Entreprises entre étudiants et recruteurs.</p>
+      <p class="asso-meta">Depuis 1995 · ~25 membres actifs</p>
+    </div>
+    <div class="asso-events">
+      <p class="events-label">Ses événements forts</p>
+      <div class="events-row" id="events-je"></div>
+    </div>
+  </div>
+</section>
+
+<section class="asso-section" id="bda">
+  <div class="asso-row wrap">
+    <div class="asso-identity">
+      <div class="asso-badge badge-orange">BDA</div>
+      <p class="eyebrow">Culture</p>
+      <h2>Bureau Des Arts</h2>
+      <p class="asso-desc">Fait vivre la scène artistique du campus : expos, concerts, ateliers, et la Semaine Culturelle chaque février.</p>
+      <p class="asso-meta">Depuis 1992 · ~30 membres actifs</p>
+    </div>
+    <div class="asso-events">
+      <p class="events-label">Ses événements forts</p>
+      <div class="events-row" id="events-bda"></div>
+    </div>
+  </div>
+</section>
+
+<section class="asso-section" id="cr">
+  <div class="asso-row wrap">
+    <div class="asso-identity">
+      <div class="asso-badge badge-navy">CR</div>
+      <p class="eyebrow">Tech</p>
+      <h2>Club Robotique</h2>
+      <p class="asso-desc">Conçoit et fait concourir un robot chaque année, du premier plan CAO jusqu'à la compétition.</p>
+      <p class="asso-meta">Depuis 2008 · ~20 membres actifs</p>
+    </div>
+    <div class="asso-events">
+      <p class="events-label">Ses événements forts</p>
+      <div class="events-row" id="events-cr"></div>
+    </div>
+  </div>
+</section>
+
+<section class="asso-section" id="ci">
+  <div class="asso-row wrap">
+    <div class="asso-identity">
+      <div class="asso-badge badge-ink">CI</div>
+      <p class="eyebrow">Tech</p>
+      <h2>Club Info</h2>
+      <p class="asso-desc">Organise la Nuit de l'Info et des conférences sur l'IA, le dev et la cybersécurité tout au long de l'année.</p>
+      <p class="asso-meta">Depuis 2001 · ~28 membres actifs</p>
+    </div>
+    <div class="asso-events">
+      <p class="events-label">Ses événements forts</p>
+      <div class="events-row" id="events-ci"></div>
+    </div>
+  </div>
+</section>
+
+<section class="asso-section" id="ah">
+  <div class="asso-row wrap">
+    <div class="asso-identity">
+      <div class="asso-badge badge-orange">AH</div>
+      <p class="eyebrow">Solidarité</p>
+      <h2>Asso Humanitaire</h2>
+      <p class="asso-desc">Monte des collectes et des actions solidaires sur le campus, en lien avec des associations locales.</p>
+      <p class="asso-meta">Depuis 1999 · ~18 membres actifs</p>
+    </div>
+    <div class="asso-events">
+      <p class="events-label">Ses événements forts</p>
+      <div class="events-row" id="events-ah"></div>
+    </div>
+  </div>
+</section>
+
+<section class="asso-section" id="ff">
+  <div class="asso-row wrap">
+    <div class="asso-identity">
+      <div class="asso-badge badge-navy">FF</div>
+      <p class="eyebrow">Culture</p>
+      <h2>Fanfare</h2>
+      <p class="asso-desc">Anime les événements du campus et se déplace pour représenter l'école aux compétitions inter-écoles de fanfares.</p>
+      <p class="asso-meta">Depuis 1985 · ~15 musiciens</p>
+    </div>
+    <div class="asso-events">
+      <p class="events-label">Ses événements forts</p>
+      <div class="events-row" id="events-ff"></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Le Tableau — fait par des élèves, pour des élèves.</span>
+    <span><a href="#">Contact</a> · <a href="#">Instagram</a></span>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="modal-overlay" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <button class="modal-close" id="modal-close" type="button" aria-label="Fermer">✕</button>
+    <div class="modal-image" id="modal-image"></div>
+    <div class="modal-body">
+      <div class="modal-tags">
+        <span class="modal-tag date" id="modal-date"></span>
+        <span class="modal-tag cat" id="modal-cat"></span>
+      </div>
+      <h3 id="modal-title"></h3>
+      <p class="modal-meta" id="modal-meta"></p>
+      <p class="modal-desc" id="modal-desc"></p>
+      <div class="modal-status" id="modal-status"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  /* ---------- clock ---------- */
+  const clockEl = document.getElementById('clock');
+  function tick(){
+    const d = new Date();
+    const p = n => String(n).padStart(2,'0');
+    clockEl.textContent = p(d.getHours())+':'+p(d.getMinutes())+':'+p(d.getSeconds());
+  }
+  tick(); setInterval(tick, 1000);
+
+  const CAT_LABEL = { soirees:'Soirées', forums:'Forums', sport:'Sport', culture:'Culture', hackathons:'Hackathons', solidarite:'Solidarité' };
+  const STATUS_LABEL = { ouvert:'Ouvert', complet:'Complet', bientot:'Bientôt complet', gratuit:'Gratuit' };
+
+  /* ---------- card art: illustration abstraite par categorie ---------- */
+  const C = { orange:'#FF4B1F', ink:'#170D02', navy:'#121B3E', paper:'#FFF6E9' };
+  const CATEGORY_ART = {
+    soirees:     { bg:C.orange, shape:C.navy,   accent:C.ink    },
+    forums:      { bg:C.navy,   shape:C.paper,  accent:C.orange },
+    sport:       { bg:C.ink,    shape:C.paper,  accent:C.orange },
+    culture:     { bg:C.orange, shape:C.paper,  accent:C.navy   },
+    hackathons:  { bg:C.navy,   shape:C.orange, accent:C.paper  },
+    solidarite:  { bg:C.orange, shape:C.ink,    accent:C.paper  }
+  };
+  const CATEGORY_SHAPES = {
+    soirees:(s,a)=>'<circle cx="228" cy="42" r="48" fill="'+s+'"/><line x1="6" y1="150" x2="130" y2="55" stroke="'+a+'" stroke-width="5"/>',
+    forums:(s,a)=>'<rect x="64" y="38" width="130" height="72" fill="'+s+'" opacity="0.92" transform="rotate(-5 129 74)"/><rect x="108" y="58" width="130" height="72" fill="'+s+'" opacity="0.55" transform="rotate(4 173 94)"/><line x1="20" y1="20" x2="60" y2="20" stroke="'+a+'" stroke-width="4"/>',
+    sport:(s,a)=>'<circle cx="236" cy="128" r="54" fill="'+s+'"/><rect x="-30" y="-6" width="150" height="26" fill="'+a+'" transform="rotate(32 30 20)"/>',
+    culture:(s,a)=>'<polygon points="0,0 74,0 0,84" fill="'+s+'"/><polygon points="300,0 226,0 300,84" fill="'+s+'"/><circle cx="150" cy="98" r="36" fill="'+a+'" opacity="0.9"/>',
+    hackathons:(s,a)=>'<polygon points="42,38 14,80 42,122 58,111 34,80 58,49" fill="'+s+'"/><polygon points="258,38 286,80 258,122 242,111 266,80 242,49" fill="'+s+'"/><rect x="132" y="54" width="13" height="13" fill="'+a+'"/><rect x="154" y="78" width="13" height="13" fill="'+a+'" opacity="0.75"/><rect x="138" y="100" width="13" height="13" fill="'+a+'" opacity="0.5"/>',
+    solidarite:(s,a)=>'<circle cx="128" cy="86" r="50" fill="'+s+'" opacity="0.88"/><circle cx="184" cy="86" r="50" fill="'+s+'" opacity="0.55"/><circle cx="250" cy="34" r="13" fill="'+a+'"/>'
+  };
+  let artUidCounter = 0;
+  function cardArtSVG(category){
+    const uid = 'art'+(artUidCounter++);
+    const t = CATEGORY_ART[category] || CATEGORY_ART.culture;
+    const shapeFn = CATEGORY_SHAPES[category] || CATEGORY_SHAPES.culture;
+    return '<svg viewBox="0 0 300 160" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">'+
+      '<defs><pattern id="'+uid+'" width="9" height="9" patternUnits="userSpaceOnUse">'+
+      '<circle cx="2" cy="2" r="1.3" fill="'+t.accent+'" opacity="0.35"/></pattern></defs>'+
+      '<rect width="300" height="160" fill="'+t.bg+'"/>'+
+      shapeFn(t.shape, t.accent)+
+      '<rect width="300" height="160" fill="url(#'+uid+')"/>'+
+      '</svg>';
+  }
+
+  function statusDot(status){
+    if(status==='ouvert' || status==='gratuit') return '<span class="status-dot filled"></span>';
+    if(status==='bientot') return '<span class="status-dot"></span>';
+    return '<span class="status-dot dim"></span>';
+  }
+
+  function buildEventCard(ev){
+    const card = document.createElement('div');
+    card.className = 'event-card';
+    card.innerHTML =
+      '<div class="card-image">'+cardArtSVG(ev.category)+
+        '<span class="card-tag date-tag">'+ev.date+'</span>'+
+        '<span class="card-tag cat-tag">'+CAT_LABEL[ev.category]+'</span>'+
+      '</div>'+
+      '<div class="card-body">'+
+        '<h4>'+ev.title+'</h4>'+
+        '<p class="card-meta">'+ev.asso+' \u00b7 '+ev.lieu+'</p>'+
+        '<button class="card-more" type="button">En savoir plus \u2192</button>'+
+        '<div class="card-status'+(ev.status==='complet' ? ' dim' : '')+'">'+statusDot(ev.status)+'<span>'+STATUS_LABEL[ev.status]+'</span></div>'+
+      '</div>';
+    card.querySelector('.card-more').addEventListener('click', ()=> openModal(ev));
+    return card;
+  }
+
+  /* ---------- modal ---------- */
+  const modalOverlay = document.getElementById('modal-overlay');
+  const modalImage = document.getElementById('modal-image');
+  const modalDate = document.getElementById('modal-date');
+  const modalCat = document.getElementById('modal-cat');
+  const modalTitle = document.getElementById('modal-title');
+  const modalMeta = document.getElementById('modal-meta');
+  const modalDesc = document.getElementById('modal-desc');
+  const modalStatus = document.getElementById('modal-status');
+  const modalCloseBtn = document.getElementById('modal-close');
+  let lastFocused = null;
+
+  function openModal(ev){
+    lastFocused = document.activeElement;
+    modalImage.innerHTML = cardArtSVG(ev.category);
+    modalDate.textContent = ev.date;
+    modalCat.textContent = CAT_LABEL[ev.category];
+    modalTitle.textContent = ev.title;
+    modalMeta.textContent = ev.asso + ' \u00b7 ' + ev.lieu;
+    modalDesc.textContent = ev.desc || '';
+    modalStatus.innerHTML = statusDot(ev.status) + '<span>' + STATUS_LABEL[ev.status] + '</span>';
+    modalOverlay.hidden = false;
+    modalCloseBtn.focus();
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(){
+    modalOverlay.hidden = true;
+    document.body.style.overflow = '';
+    if(lastFocused) lastFocused.focus();
+  }
+  modalCloseBtn.addEventListener('click', closeModal);
+  modalOverlay.addEventListener('click', (e)=>{ if(e.target === modalOverlay) closeModal(); });
+  document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape' && !modalOverlay.hidden) closeModal(); });
+
+  /* ---------- donnees: evenements forts par association ---------- */
+  const ASSO_EVENTS = {
+    'events-bde':[
+      { date:'04 SEPT', title:'Weekend d\u2019int\u00e9gration', lieu:'Parc du Lac', asso:'BDE', category:'soirees', status:'gratuit', desc:'Le grand d\u00e9part. Deux jours pour rencontrer ta promo avant m\u00eame la premi\u00e8re rentr\u00e9e des cours.' },
+      { date:'12 DEC', title:'Gala d\u2019hiver', lieu:'Grand Amphi', asso:'BDE', category:'soirees', status:'bientot', desc:'La grande soir\u00e9e du premier semestre, organis\u00e9e par le BDE dans le Grand Amphi.' },
+      { date:'15 MAI', title:'Gala de fin d\u2019ann\u00e9e', lieu:'Grand Amphi', asso:'BDE', category:'soirees', status:'ouvert', desc:'Le rendez-vous qui cl\u00f4ture l\u2019ann\u00e9e, avant les derniers examens et les vacances.' }
+    ],
+    'events-bds':[
+      { date:'15 OCT', title:'Tournoi de Rentr\u00e9e', lieu:'Gymnase', asso:'BDS', category:'sport', status:'ouvert', desc:'Le premier tournoi sportif de l\u2019ann\u00e9e, ouvert \u00e0 toutes les promos, sans niveau requis.' },
+      { date:'20 FEV', title:'Tournoi Inter-\u00e9coles', lieu:'Gymnase', asso:'BDS', category:'sport', status:'bientot', desc:'Ton \u00e9cole affronte les campus voisins sur une journ\u00e9e de comp\u00e9titions sportives.' }
+    ],
+    'events-je':[
+      { date:'02 OCT', title:'Forum Entreprises', lieu:'Hall central', asso:'JE', category:'forums', status:'ouvert', desc:'Les entreprises partenaires viennent recruter stagiaires et alternants, un stand \u00e0 la fois.' },
+      { date:'10 AVR', title:'Forum Alumni', lieu:'Hall central', asso:'JE', category:'forums', status:'gratuit', desc:'D\u2019anciens \u00e9l\u00e8ves reviennent partager leur parcours et donner des conseils de carri\u00e8re.' }
+    ],
+    'events-bda':[
+      { date:'09 FEV', title:'Semaine Culturelle', lieu:'Grand Amphi', asso:'BDA', category:'culture', status:'ouvert', desc:'Expos, concerts et ateliers organis\u00e9s par le Bureau Des Arts pendant une semaine compl\u00e8te.' }
+    ],
+    'events-cr':[
+      { date:'05 MAI', title:'Coupe de Robotique', lieu:'Atelier Robotique', asso:'Club Robotique', category:'hackathons', status:'ouvert', desc:'Le robot con\u00e7u toute l\u2019ann\u00e9e affronte ceux des autres \u00e9coles, \u00e9preuve par \u00e9preuve.' }
+    ],
+    'events-ci':[
+      { date:'07 NOV', title:'Nuit de l\u2019Info', lieu:'Salle Info', asso:'Club Info', category:'hackathons', status:'complet', desc:'Douze heures de code, une nuit blanche, et une \u00e9quipe \u00e0 former avant minuit.' },
+      { date:'21 NOV', title:'Conf\u00e9rence IA & Ing\u00e9nierie', lieu:'Amphi B', asso:'Club Info', category:'forums', status:'gratuit', desc:'Des intervenants du secteur discutent des usages concrets de l\u2019IA dans l\u2019ing\u00e9nierie.' }
+    ],
+    'events-ah':[
+      { date:'18 DEC', title:'Collecte de No\u00ebl', lieu:'Hall central', asso:'Asso Humanitaire', category:'solidarite', status:'ouvert', desc:'Une collecte de dons avant les vacances, au profit d\u2019associations locales.' },
+      { date:'14 MARS', title:'Course Solidaire', lieu:'Campus', asso:'Asso Humanitaire', category:'solidarite', status:'ouvert', desc:'Une course ouverte \u00e0 tous sur le campus, dont les inscriptions financent un projet solidaire.' }
+    ],
+    'events-ff':[
+      { date:'25 MARS', title:'Concert de la Fanfare', lieu:'Amphith\u00e9\u00e2tre', asso:'Fanfare', category:'culture', status:'gratuit', desc:'Le concert annuel de la fanfare, ouvert \u00e0 tout le campus et aux familles.' }
+    ]
+  };
+
+  Object.keys(ASSO_EVENTS).forEach(containerId=>{
+    const container = document.getElementById(containerId);
+    if(!container) return;
+    ASSO_EVENTS[containerId].forEach(ev => container.appendChild(buildEventCard(ev)));
+  });
+
+})();
+</script>
+
+</body>
+</html>

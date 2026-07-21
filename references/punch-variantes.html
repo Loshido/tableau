@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Variantes de .punch — Le Tableau</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap');
+
+:root{
+  --orange:#FF4B1F;
+  --ink:#170D02;
+  --navy:#121B3E;
+  --paper:#FFF6E9;
+  --font-display:'Bricolage Grotesque', sans-serif;
+  --font-body:'IBM Plex Sans', sans-serif;
+  --font-mono:'IBM Plex Mono', monospace;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+body{ background:var(--paper); font-family:var(--font-body); color:var(--ink); padding:40px clamp(20px,5vw,60px) 100px; }
+h1{ font-family:var(--font-display); font-weight:800; text-transform:uppercase; letter-spacing:-0.02em; font-size:clamp(1.6rem,4vw,2.4rem); margin-bottom:8px; }
+p.intro{ font-family:var(--font-mono); font-size:0.8rem; opacity:.65; margin-bottom:48px; max-width:60ch; }
+.sample{ margin-bottom:56px; }
+.sample-label{
+  font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase;
+  color:var(--ink); opacity:.6; margin-bottom:10px; display:flex; align-items:center; gap:10px;
+}
+.sample-label code{ background:var(--ink); color:var(--paper); padding:2px 8px; font-size:0.7rem; opacity:1; }
+.block{ height:64px; display:flex; align-items:center; padding:0 20px; font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; }
+.block.top{ background:var(--orange); color:var(--ink); }
+.block.bottom{ background:var(--navy); color:var(--orange); }
+
+.punch{ width:100%; --a:var(--orange); --b:var(--navy); }
+
+.punch--circles{
+  height:26px; background-color:var(--a);
+  background-image:radial-gradient(circle at 13px 13px, var(--b) 13px, transparent 13.5px);
+  background-repeat:repeat-x; background-position:13px top; background-size:26px 26px;
+}
+
+.punch--zigzag{ position:relative; height:26px; background-color:var(--b); overflow:hidden; }
+.punch--zigzag::before{
+  content:""; position:absolute; inset:0; background-color:var(--a);
+  clip-path:polygon(0 0,100% 0,100% 100%,87.5% 35%,75% 100%,62.5% 35%,50% 100%,37.5% 35%,25% 100%,12.5% 35%,0% 100%);
+}
+
+.punch--squares{
+  height:14px; background-color:var(--a);
+  background-image:repeating-linear-gradient(to right, var(--b) 0 14px, transparent 14px 28px);
+  background-position:7px 0;
+}
+
+.punch--diamonds{ height:24px; background-color:var(--a); position:relative; overflow:hidden; }
+.punch--diamonds::before{
+  content:""; position:absolute; inset:0; background-color:var(--b);
+  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpolygon points='12,3 21,12 12,21 3,12' fill='white'/%3E%3C/svg%3E");
+  mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpolygon points='12,3 21,12 12,21 3,12' fill='white'/%3E%3C/svg%3E");
+  -webkit-mask-repeat:repeat; mask-repeat:repeat;
+  -webkit-mask-size:24px 24px; mask-size:24px 24px;
+}
+
+.punch--scallop{
+  height:20px; background-color:var(--b);
+  background-image:radial-gradient(circle at 10px 0, var(--a) 10px, transparent 10.5px);
+  background-repeat:repeat-x; background-size:20px 20px; background-position:0 top;
+}
+
+.punch--chevrons{ height:24px; background-color:var(--a); position:relative; overflow:hidden; }
+.punch--chevrons::before{
+  content:""; position:absolute; inset:0; background-color:var(--b);
+  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='24'%3E%3Cpath d='M3,3 L13,12 L3,21' fill='none' stroke='white' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='24'%3E%3Cpath d='M3,3 L13,12 L3,21' fill='none' stroke='white' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  -webkit-mask-repeat:repeat; mask-repeat:repeat;
+  -webkit-mask-size:16px 24px; mask-size:16px 24px;
+}
+
+.punch--torn{ position:relative; height:26px; background-color:var(--b); overflow:hidden; }
+.punch--torn::before{
+  content:""; position:absolute; inset:0; background-color:var(--a);
+  clip-path:polygon(0 0,100% 0,100% 58%,92% 100%,84% 45%,75% 85%,68% 40%,58% 92%,48% 50%,40% 100%,32% 42%,22% 80%,14% 38%,6% 95%,0 55%);
+}
+</style>
+</head>
+<body>
+
+<h1>Variantes de .punch</h1>
+<p class="intro">Même principe que l'original (une couture entre deux sections pleine couleur), sept découpes différentes. Couleurs pilotées par --a (section du dessus) et --b (section du dessous), réutilisables avec n'importe quelle paire.</p>
+
+<div class="sample">
+  <div class="sample-label">1. Cercles — perforation billet (existant) <code>.punch--circles</code></div>
+  <div class="block top">Section du dessus</div>
+  <div class="punch punch--circles"></div>
+  <div class="block bottom">Section du dessous</div>
+</div>
+
+<div class="sample">
+  <div class="sample-label">2. Dents de scie — bord régulier <code>.punch--zigzag</code></div>
+  <div class="block top">Section du dessus</div>
+  <div class="punch punch--zigzag"></div>
+  <div class="block bottom">Section du dessous</div>
+</div>
+
+<div class="sample">
+  <div class="sample-label">3. Carrés — façon pixel / mono <code>.punch--squares</code></div>
+  <div class="block top">Section du dessus</div>
+  <div class="punch punch--squares"></div>
+  <div class="block bottom">Section du dessous</div>
+</div>
+
+<div class="sample">
+  <div class="sample-label">4. Losanges <code>.punch--diamonds</code></div>
+  <div class="block top">Section du dessus</div>
+  <div class="punch punch--diamonds"></div>
+  <div class="block bottom">Section du dessous</div>
+</div>
+
+<div class="sample">
+  <div class="sample-label">5. Vagues / feston <code>.punch--scallop</code></div>
+  <div class="block top">Section du dessus</div>
+  <div class="punch punch--scallop"></div>
+  <div class="block bottom">Section du dessous</div>
+</div>
+
+<div class="sample">
+  <div class="sample-label">6. Chevrons <code>.punch--chevrons</code></div>
+  <div class="block top">Section du dessus</div>
+  <div class="punch punch--chevrons"></div>
+  <div class="block bottom">Section du dessous</div>
+</div>
+
+<div class="sample">
+  <div class="sample-label">7. Déchirure irrégulière — le "et d'autres" <code>.punch--torn</code></div>
+  <div class="block top">Section du dessus</div>
+  <div class="punch punch--torn"></div>
+  <div class="block bottom">Section du dessous</div>
+</div>
+
+</body>
+</html>

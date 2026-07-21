@@ -1,0 +1,40 @@
+/* fn-active
+   fn-inactive */
+
+.fns .fn-active {
+    position: relative;
+    
+    color: transparent;
+    animation: in .5s ease-in-out;
+    display: block;
+    color: var(--color-papier);
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 100%;
+
+        animation: in-after .5s ease-in-out;
+
+        background-color: var(--color-papier);
+    }
+}
+
+.fns .fn-inactive {
+    display: none;
+}
+
+
+@keyframes in {
+    50% { color: transparent }
+    
+    to{ color: var(--color-papier) }
+}
+
+@keyframes in-after {
+    0%, 100% { width: 0 }
+    50% { width: 100% }
+}

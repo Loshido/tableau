@@ -1,0 +1,8 @@
+.punch-diamonds-duo{ height:26px; background-color:var(--a); }
+.punch-diamonds-duo::before{
+    content:""; position:absolute; inset:0; background-color:var(--b);
+    -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='26'%3E%3Cpolygon points='12,3 22,13 12,23 2,13' fill='white'/%3E%3Cpolygon points='30,8 35,13 30,18 25,13' fill='white'/%3E%3C/svg%3E");
+    mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='26'%3E%3Cpolygon points='12,3 22,13 12,23 2,13' fill='white'/%3E%3Cpolygon points='30,8 35,13 30,18 25,13' fill='white'/%3E%3C/svg%3E");
+    -webkit-mask-repeat:repeat; mask-repeat:repeat;
+    -webkit-mask-size:40px 26px; mask-size:40px 26px;
+}

@@ -1,0 +1,57 @@
+@import 'tailwindcss';
+
+@font-face {
+    font-family: "Bricolage Grotesque";
+    src: url(./assets/fonts/BricolageGrotesque.ttf);
+}
+@font-face {
+    font-family: "JetbrainsMono";
+    src: url(./assets/fonts/JetBrainsMono.ttf);
+}
+@font-face {
+    font-family: "IBMPlexSans";
+    src: url(./assets/fonts/IBMPlexSans.ttf);
+}
+
+@theme {
+    --font-display: "Bricolage Grotesque", sans-serif;
+    --font-body: "IBMPlexSans";
+    --font-mono: "JetbrainsMono";
+    --default-font-family: "IBMPlexSans";
+
+    --color-orange: #FF4B1F;
+    --color-orange-dark: #D93A11;
+    --color-ink: #170D02;
+    --color-navy: #121B3E;
+    --color-papier: #FFF6E9;
+}
+
+::selection{
+    background-color: var(--color-orange);
+    color: var(--color-papier);
+}
+
+.animate-title {
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.opacity-0 {
+    opacity: 0;
+}
+
+.opacity-100 {
+    opacity: 1;
+}
+
+.translate-y-10 {
+    transform: translateY(2rem);
+}
+
+.translate-y-0 {
+    transform: translateY(0);
+}
+
+html {
+    scroll-behavior: smooth;
+    /* scroll-snap-type: y mandatory */
+}

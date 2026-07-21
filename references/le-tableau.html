@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Tableau — tous les événements de ton école, un seul endroit</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
+
+:root{
+  --orange:#FF4B1F;
+  --orange-dark:#D93A11;
+  --ink:#170D02;
+  --navy:#121B3E;
+  --navy-2:#1B2650;
+  --paper:#FFF6E9;
+  --paper-dim:#E9DEC7;
+  --font-display:'Bricolage Grotesque', sans-serif;
+  --font-body:'IBM Plex Sans', sans-serif;
+  --font-mono:'IBM Plex Mono', monospace;
+}
+
+*{box-sizing:border-box; margin:0; padding:0;}
+
+html{scroll-behavior:smooth;}
+
+body{
+  font-family:var(--font-body);
+  color:var(--ink);
+  background:var(--paper);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+img,svg{display:block; max-width:100%;}
+
+a{color:inherit;}
+
+.wrap{
+  max-width:1180px;
+  margin:0 auto;
+  padding:0 clamp(20px,5vw,56px);
+}
+
+.eyebrow{
+  font-family:var(--font-mono);
+  font-size:0.72rem;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  font-weight:500;
+}
+
+.section{ padding:clamp(64px,10vw,120px) 0; }
+
+h1,h2,h3{
+  font-family:var(--font-display);
+  font-weight:800;
+  letter-spacing:-0.02em;
+  line-height:0.98;
+  text-transform:uppercase;
+}
+
+::selection{ background:var(--ink); color:var(--paper); }
+
+:focus-visible{
+  outline:3px solid var(--ink);
+  outline-offset:3px;
+}
+
+/* ---------- NAV ---------- */
+.nav{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:var(--orange);
+  border-bottom:2px solid var(--ink);
+}
+.nav .wrap{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding-top:16px;
+  padding-bottom:16px;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-family:var(--font-display);
+  font-weight:800;
+  font-size:1.15rem;
+  text-transform:uppercase;
+  letter-spacing:-0.01em;
+}
+.brand-mark{
+  width:22px; height:22px;
+  background:var(--ink);
+  position:relative;
+  flex:none;
+}
+.brand-mark::after{
+  content:"";
+  position:absolute;
+  inset:5px;
+  background:var(--orange);
+}
+.nav-cta{
+  font-family:var(--font-mono);
+  font-size:0.8rem;
+  letter-spacing:0.05em;
+  text-transform:uppercase;
+  text-decoration:none;
+  border:2px solid var(--ink);
+  padding:9px 16px;
+  background:var(--ink);
+  color:var(--paper);
+  transition:transform .15s ease;
+  white-space:nowrap;
+}
+.nav-cta:hover{ transform:translate(-2px,-2px); box-shadow:3px 3px 0 var(--ink); }
+
+/* ---------- HERO ---------- */
+.hero{
+  background:var(--orange);
+  padding-top:clamp(56px,9vw,96px);
+  padding-bottom:0;
+  position:relative;
+}
+.hero .wrap{
+  display:grid;
+  gap:28px;
+}
+.hero .eyebrow{ color:var(--ink); opacity:.75; }
+.hero h1{
+  font-size:clamp(2.6rem,7.2vw,5.6rem);
+  max-width:14ch;
+}
+.hero p.lead{
+  font-size:clamp(1.05rem,2vw,1.3rem);
+  max-width:44ch;
+  line-height:1.45;
+}
+.hero-form{
+  display:flex;
+  gap:0;
+  max-width:480px;
+  border:2px solid var(--ink);
+}
+.hero-form input{
+  flex:1;
+  min-width:0;
+  border:none;
+  background:var(--paper);
+  padding:16px 18px;
+  font-family:var(--font-body);
+  font-size:1rem;
+  color:var(--ink);
+}
+.hero-form input::placeholder{ color:#7a6c5c; }
+.hero-form button{
+  border:none;
+  border-left:2px solid var(--ink);
+  background:var(--ink);
+  color:var(--paper);
+  font-family:var(--font-mono);
+  font-size:0.85rem;
+  letter-spacing:0.04em;
+  text-transform:uppercase;
+  padding:0 22px;
+  cursor:pointer;
+  transition:background .15s ease;
+}
+.hero-form button:hover{ background:var(--orange-dark); }
+.hero-note{
+  font-size:0.9rem;
+  opacity:.75;
+  font-family:var(--font-mono);
+}
+.hero-secondary{
+  font-family:var(--font-mono);
+  font-size:0.85rem;
+  text-decoration:none;
+  border-bottom:2px solid var(--ink);
+  padding-bottom:2px;
+  align-self:start;
+}
+
+/* ticket perforation seam */
+.punch{
+  height:26px;
+  width:100%;
+  background-repeat:repeat-x;
+  background-position:13px top;
+  background-size:26px 26px;
+  margin-top:48px;
+}
+
+/* ---------- BOARD ---------- */
+.board-section{
+  background:var(--navy);
+  color:var(--paper);
+}
+.board-head{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:16px;
+  margin-bottom:38px;
+}
+.board-head .eyebrow{ color:var(--orange); }
+.board-head h2{
+  font-size:clamp(1.9rem,4vw,3.1rem);
+  color:var(--paper);
+}
+.clock{
+  font-family:var(--font-mono);
+  font-size:1rem;
+  letter-spacing:0.05em;
+  background:var(--ink);
+  color:var(--orange);
+  padding:8px 14px;
+  border:1px solid var(--orange);
+  white-space:nowrap;
+}
+.clock::before{
+  content:"● ";
+  color:var(--orange);
+}
+
+.board{
+  border:2px solid var(--orange);
+  background:var(--navy-2);
+}
+.board-row{
+  display:grid;
+  grid-template-columns: 4.6em 1fr 8.6em 8.6em 8.4em;
+  gap:14px;
+  align-items:center;
+  padding:14px clamp(14px,2vw,22px);
+  border-bottom:1px solid rgba(255,75,31,0.28);
+  font-family:var(--font-mono);
+  font-size:0.85rem;
+}
+.board-row:last-child{ border-bottom:none; }
+.board-row.head-row{
+  font-size:0.68rem;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--orange);
+  background:var(--ink);
+  border-bottom:1px solid rgba(255,75,31,0.4);
+}
+.flap-cell{
+  display:flex;
+  color:var(--orange);
+  white-space:pre;
+  min-width:0;
+}
+.head-row .flap-cell{ color:var(--orange); white-space:normal; }
+.col-event{ color:var(--paper); }
+.head-row .col-event{ color:var(--orange); }
+.flap-char{
+  display:inline-block;
+}
+.flap-char.flip{
+  animation:flapPulse 90ms linear infinite;
+}
+@keyframes flapPulse{
+  0%{ transform:scaleY(1); opacity:1; }
+  50%{ transform:scaleY(0.35); opacity:.55; }
+  100%{ transform:scaleY(1); opacity:1; }
+}
+.cell-label{ display:none; }
+
+/* ---------- FEATURES ---------- */
+.features{ background:var(--paper); }
+.features-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:clamp(28px,4vw,48px);
+  margin-top:44px;
+}
+.feature .eyebrow{ color:var(--orange-dark); display:block; margin-bottom:14px; }
+.feature h3{
+  font-size:clamp(1.25rem,2.4vw,1.7rem);
+  margin-bottom:12px;
+  text-transform:none;
+  letter-spacing:-0.01em;
+}
+.feature p{
+  font-size:0.98rem;
+  line-height:1.55;
+  color:#3a2e21;
+  max-width:32ch;
+}
+.feature{
+  border-top:3px solid var(--ink);
+  padding-top:20px;
+}
+
+/* ---------- ASSOS ---------- */
+.assos{ background:var(--orange); }
+.assos-head{ max-width:52ch; margin-bottom:44px; }
+.assos-head h2{ font-size:clamp(1.9rem,4vw,3.1rem); }
+.assos-head p{ margin-top:14px; font-size:1.05rem; max-width:46ch; line-height:1.5; }
+.assos-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:2px;
+  background:var(--ink);
+  border:2px solid var(--ink);
+}
+.asso-tile{
+  background:var(--paper);
+  padding:24px 18px;
+  min-height:140px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  transition:transform .15s ease;
+  cursor:default;
+}
+.asso-tile:hover{ transform:translateY(-4px); }
+.asso-tile .init{
+  font-family:var(--font-mono);
+  font-weight:600;
+  font-size:1.7rem;
+  letter-spacing:0.02em;
+}
+.asso-tile .lbl{
+  font-family:var(--font-body);
+  font-size:0.85rem;
+  margin-top:10px;
+}
+.asso-tile.navy{ background:var(--navy); color:var(--paper); }
+.asso-tile.ink{ background:var(--ink); color:var(--paper); }
+
+/* ---------- CTA ---------- */
+.cta-final{
+  background:var(--ink);
+  color:var(--paper);
+  text-align:left;
+}
+.cta-final h2{
+  font-size:clamp(2rem,5vw,3.6rem);
+  max-width:16ch;
+  color:var(--paper);
+}
+.cta-final .lead{
+  margin-top:18px;
+  max-width:46ch;
+  opacity:.8;
+  font-size:1.05rem;
+  line-height:1.5;
+}
+.cta-final .hero-form{
+  margin-top:32px;
+  border-color:var(--orange);
+}
+.cta-final .hero-form input{ background:var(--paper); }
+.cta-final .hero-form button{
+  background:var(--orange);
+  color:var(--ink);
+  border-left:2px solid var(--orange);
+}
+.cta-final .hero-form button:hover{ background:var(--orange-dark); color:var(--paper); }
+
+/* ---------- FOOTER ---------- */
+footer{
+  background:var(--ink);
+  color:var(--paper);
+  border-top:1px solid rgba(255,246,233,0.15);
+}
+footer .wrap{
+  padding:26px clamp(20px,5vw,56px);
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  justify-content:space-between;
+  align-items:center;
+  font-family:var(--font-mono);
+  font-size:0.78rem;
+  opacity:.7;
+}
+footer a{ text-decoration:none; opacity:.9; }
+footer a:hover{ text-decoration:underline; }
+
+/* ---------- reveal ---------- */
+.reveal{
+  opacity:0;
+  transform:translateY(18px);
+  transition:opacity .6s ease, transform .6s ease;
+}
+.reveal.in{ opacity:1; transform:translateY(0); }
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width:880px){
+  .features-grid{ grid-template-columns:1fr; gap:34px; }
+  .assos-grid{ grid-template-columns:repeat(2,1fr); }
+  .board-row{ grid-template-columns:1fr; gap:6px; padding:16px; }
+  .board-row.head-row{ display:none; }
+  .cell-label{
+    display:inline-block;
+    width:5.2em;
+    color:var(--orange);
+    opacity:.65;
+    flex:none;
+  }
+  .flap-cell{ align-items:baseline; }
+  .board-row .flap-cell{ display:flex; }
+  .board-row:not(.head-row){ border-bottom:1px solid rgba(255,75,31,0.28); }
+}
+
+@media (max-width:560px){
+  .hero-form{ flex-direction:column; border:none; gap:10px; }
+  .hero-form input{ border:2px solid var(--ink); }
+  .hero-form button{ border:2px solid var(--ink); padding:14px; }
+  .cta-final .hero-form input{ border-color:var(--orange); }
+  .cta-final .hero-form button{ border-color:var(--orange); }
+  .assos-grid{ grid-template-columns:1fr 1fr; }
+  .clock{ font-size:0.85rem; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+  .reveal{ transition:none; opacity:1; transform:none; }
+  .flap-char.flip{ animation:none; }
+  .nav-cta, .asso-tile{ transition:none; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <div class="brand"><span class="brand-mark"></span>Le Tableau</div>
+    <a class="nav-cta" href="#rejoindre">Rejoindre</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">École d'ingénieur — vie associative</p>
+    <h1>Tous les événements<br>de ton école.<br>Un seul tableau.</h1>
+    <p class="lead">Soirées, galas, forums, tournois, confs : chaque asso poste de son côté. Toi, tu regardes un seul endroit — et tu ne rates plus rien.</p>
+    <form class="hero-form" id="hero-form">
+      <input type="email" placeholder="prenom.nom@ecole.fr" required aria-label="Adresse email">
+      <button type="submit">Rejoindre la liste</button>
+    </form>
+    <p class="hero-note">Déjà adopté par des assos partout sur le campus.</p>
+  </div>
+  <div class="punch" style="background-color:var(--orange); background-image:radial-gradient(circle at 13px 13px, var(--navy) 13px, transparent 13.5px);"></div>
+</header>
+
+<section class="board-section section" id="tableau">
+  <div class="wrap">
+    <div class="board-head">
+      <div>
+        <p class="eyebrow">Mis à jour en direct</p>
+        <h2>Le tableau</h2>
+      </div>
+      <div class="clock" id="clock">--:--:--</div>
+    </div>
+
+    <div class="board" id="board">
+      <div class="board-row head-row">
+        <div class="flap-cell">Heure</div>
+        <div class="flap-cell col-event">Événement</div>
+        <div class="flap-cell">Lieu</div>
+        <div class="flap-cell">Asso</div>
+        <div class="flap-cell">Statut</div>
+      </div>
+      <!-- rows injected by JS -->
+    </div>
+  </div>
+  <div class="punch" style="background-color:var(--navy); background-image:radial-gradient(circle at 13px 13px, var(--paper) 13px, transparent 13.5px);"></div>
+</section>
+
+<section class="features section">
+  <div class="wrap">
+    <p class="eyebrow" style="color:var(--orange-dark);">Comment ça marche</p>
+    <div class="features-grid">
+      <div class="feature reveal">
+        <span class="eyebrow">Tout au même endroit</span>
+        <h3>Chaque asso, une ligne</h3>
+        <p>Fini les stories perdues et les groupes WhatsApp noyés. Chaque événement de chaque asso arrive sur le même tableau.</p>
+      </div>
+      <div class="feature reveal">
+        <span class="eyebrow">Filtré pour toi</span>
+        <h3>Regarde ce qui t'intéresse</h3>
+        <p>Sport, tech, culture, soirées : tu choisis les assos que tu suis. Le tableau s'ajuste tout seul.</p>
+      </div>
+      <div class="feature reveal">
+        <span class="eyebrow">Alerte avant complet</span>
+        <h3>Ne rate plus une place</h3>
+        <p>Une notification quand les places se remplissent — pas une fois que c'est trop tard.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="assos section">
+  <div class="wrap">
+    <div class="assos-head">
+      <h2>Toutes les assos.<br>Un seul tableau.</h2>
+      <p>BDE, BDS, Junior-Entreprise, clubs tech ou culture : chacune garde sa page, toi tu as la vue d'ensemble.</p>
+    </div>
+    <div class="assos-grid">
+      <div class="asso-tile"><span class="init">BDE</span><span class="lbl">Bureau Des Élèves</span></div>
+      <div class="asso-tile navy"><span class="init">BDS</span><span class="lbl">Bureau Des Sports</span></div>
+      <div class="asso-tile"><span class="init">JE</span><span class="lbl">Junior-Entreprise</span></div>
+      <div class="asso-tile ink"><span class="init">BDA</span><span class="lbl">Bureau Des Arts</span></div>
+      <div class="asso-tile navy"><span class="init">CR</span><span class="lbl">Club Robotique</span></div>
+      <div class="asso-tile"><span class="init">CI</span><span class="lbl">Club Info</span></div>
+      <div class="asso-tile ink"><span class="init">AH</span><span class="lbl">Asso Humanitaire</span></div>
+      <div class="asso-tile navy"><span class="init">FF</span><span class="lbl">Fanfare</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-final section" id="rejoindre">
+  <div class="wrap">
+    <p class="eyebrow" style="color:var(--orange);">Avant tout le monde</p>
+    <h2>Ton premier événement commence par une inscription.</h2>
+    <p class="lead">On te prévient dès que le tableau ouvre pour ton école.</p>
+    <form class="hero-form" id="cta-form">
+      <input type="email" placeholder="prenom.nom@ecole.fr" required aria-label="Adresse email">
+      <button type="submit">Rejoindre la liste</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>Le Tableau — fait par des élèves, pour des élèves.</span>
+    <span><a href="#">Contact</a> · <a href="#">Instagram</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Live clock ---------- */
+  const clockEl = document.getElementById('clock');
+  function tick(){
+    const d = new Date();
+    const p = n => String(n).padStart(2,'0');
+    clockEl.textContent = p(d.getHours())+':'+p(d.getMinutes())+':'+p(d.getSeconds());
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  /* ---------- Flap board ---------- */
+  const RAND_POOL = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+
+  function animateChar(span, target){
+    if(reduceMotion){ span.textContent = target === ' ' ? '\u00A0' : target; return; }
+    let ticksLeft = 3 + Math.floor(Math.random()*4);
+    span.classList.add('flip');
+    const iv = setInterval(()=>{
+      ticksLeft--;
+      if(ticksLeft <= 0){
+        span.textContent = target === ' ' ? '\u00A0' : target;
+        span.classList.remove('flip');
+        clearInterval(iv);
+      } else {
+        span.textContent = RAND_POOL[Math.floor(Math.random()*RAND_POOL.length)];
+      }
+    }, 55 + Math.random()*35);
+  }
+
+  function setFlap(cell, text){
+    cell.innerHTML = '';
+    text.split('').forEach(ch=>{
+      const span = document.createElement('span');
+      span.className = 'flap-char';
+      span.textContent = '\u00A0';
+      cell.appendChild(span);
+      animateChar(span, ch);
+    });
+  }
+
+  const EVENTS = [
+    { heure:'19:00', event:'Gala de fin d\u2019annee',      lieu:'Grand Amphi',  asso:'BDE',       statut:'OUVERT'          },
+    { heure:'12:30', event:'Forum Entreprises',            lieu:'Hall central', asso:'JE',        statut:'OUVERT'          },
+    { heure:'21:00', event:'Nuit de l\u2019Info',           lieu:'Salle Info',   asso:'Club Info', statut:'COMPLET'         },
+    { heure:'09:00', event:'Tournoi Inter-ecoles',         lieu:'Gymnase',      asso:'BDS',       statut:'BIENTOT COMPLET' },
+    { heure:'18:30', event:'Conference IA & Ingenierie',   lieu:'Amphi B',      asso:'Club Tech', statut:'GRATUIT'         },
+    { heure:'20:00', event:'Soiree d\u2019integration',     lieu:'Le Zinc',      asso:'BDE',       statut:'OUVERT'          }
+  ];
+
+  const COL_WIDTH = { heure:5, event:26, lieu:12, asso:9, statut:15 };
+  function pad(str, len){
+    str = str.toUpperCase();
+    if(str.length >= len) return str.slice(0,len);
+    return str + ' '.repeat(len - str.length);
+  }
+
+  const boardEl = document.getElementById('board');
+  const rowEls = [];
+
+  EVENTS.forEach(ev=>{
+    const row = document.createElement('div');
+    row.className = 'board-row';
+    row.innerHTML =
+      '<div class="flap-cell col-heure"><span class="cell-label">Heure</span><span class="cell-flap"></span></div>'+
+      '<div class="flap-cell col-event"><span class="cell-label">Evenement</span><span class="cell-flap"></span></div>'+
+      '<div class="flap-cell col-lieu"><span class="cell-label">Lieu</span><span class="cell-flap"></span></div>'+
+      '<div class="flap-cell col-asso"><span class="cell-label">Asso</span><span class="cell-flap"></span></div>'+
+      '<div class="flap-cell col-statut"><span class="cell-label">Statut</span><span class="cell-flap"></span></div>';
+    boardEl.appendChild(row);
+    rowEls.push({ el:row, data:ev });
+  });
+
+  function renderRow(rowObj){
+    const { el, data } = rowObj;
+    setFlap(el.querySelector('.col-heure .cell-flap'), pad(data.heure, COL_WIDTH.heure));
+    setFlap(el.querySelector('.col-event .cell-flap'), pad(data.event, COL_WIDTH.event));
+    setFlap(el.querySelector('.col-lieu .cell-flap'), pad(data.lieu, COL_WIDTH.lieu));
+    setFlap(el.querySelector('.col-asso .cell-flap'), pad(data.asso, COL_WIDTH.asso));
+    setFlap(el.querySelector('.col-statut .cell-flap'), pad(data.statut, COL_WIDTH.statut));
+  }
+
+  let boardRevealed = false;
+  const boardObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting && !boardRevealed){
+        boardRevealed = true;
+        rowEls.forEach((r,i)=>{
+          setTimeout(()=>renderRow(r), i * 140);
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+  boardObserver.observe(boardEl);
+
+  /* subtle live status changes after initial reveal */
+  if(!reduceMotion){
+    setInterval(()=>{
+      if(!boardRevealed) return;
+      const r = rowEls[3]; // Tournoi Inter-ecoles
+      r.data.statut = r.data.statut === 'BIENTOT COMPLET' ? 'COMPLET' : 'BIENTOT COMPLET';
+      setFlap(r.el.querySelector('.col-statut .cell-flap'), pad(r.data.statut, COL_WIDTH.statut));
+    }, 7000);
+  }
+
+  /* ---------- scroll reveal for features ---------- */
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('in');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+  revealEls.forEach(el=>revealObserver.observe(el));
+
+  /* ---------- forms ---------- */
+  function wireForm(id){
+    const form = document.getElementById(id);
+    if(!form) return;
+    form.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const btn = form.querySelector('button');
+      const input = form.querySelector('input');
+      if(!input.value) return;
+      btn.textContent = 'Inscrit\u00b7e \u2713';
+      input.disabled = true;
+      btn.disabled = true;
+    });
+  }
+  wireForm('hero-form');
+  wireForm('cta-form');
+
+})();
+</script>
+
+</body>
+</html>
