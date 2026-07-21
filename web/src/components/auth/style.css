@@ -1,0 +1,11 @@
+@keyframes stars {
+    0% {
+        display: none;
+        transform: translate(var(--from-x), var(--from-y)) rotate(0deg);
+    }
+    1%, 99% { display: block;}
+    100% {
+        display: none;
+        transform: translate(var(--to-x), var(--to-y)) rotate(var(--rotation));
+    }
+}

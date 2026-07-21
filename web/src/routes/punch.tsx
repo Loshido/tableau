@@ -1,9 +1,9 @@
-import PunchDiamonds from "../components/punch/diamonds/mod"
-import PunchDiamondsConfetti from "../components/punch/diamonds-confetti/mod"
-import PunchDiamondsDuo from "../components/punch/diamonds-duo/mod"
-import PunchDiamondsQuinconce from "../components/punch/diamonds-quinconce/mod"
-import PunchDiamondsTeeth from "../components/punch/diamonds-teeth/mod"
-import PunchDiamondsTight from "../components/punch/diamonds-tight/mod"
+import PunchDiamonds from "~/components/punch/diamonds/mod"
+import PunchDiamondsConfetti from "~/components/punch/diamonds-confetti/mod"
+import PunchDiamondsDuo from "~/components/punch/diamonds-duo/mod"
+import PunchDiamondsQuinconce from "~/components/punch/diamonds-quinconce/mod"
+import PunchDiamondsTeeth from "~/components/punch/diamonds-teeth/mod"
+import PunchDiamondsTight from "~/components/punch/diamonds-tight/mod"
 
 export default () => <section class="bg-papier text-ink p-12 min-h-screen w-screen">
     <h1 class="font-display font-extrabold uppercase text-4xl mb-2">

@@ -1,5 +1,5 @@
 import { createSignal, For, onCleanup, onMount } from "solid-js";
-import { Text } from "../../logo/mod";
+import { Text } from "~/components/logo/mod";
 import "./animation.css"
 
 interface FonctionsProps {
@@ -34,10 +34,10 @@ export default function Fonctions({ fns, hauteur_fn }: FonctionsProps) {
             <rect width="800%" height="800%" fill="url(#a)"/>
         </svg>
         <div class="h-screen w-full flex flex-col justify-center sticky top-0">
-            <div class="absolute top-0 h-[80dvh] sm:h-[85dvh] mt-[-40dvh]">
+            <div class="absolute top-0 h-[80dvh] sm:h-[85dvh] mt-[-40dvh] pointer-events-none">
                 <div class="font-mono font-extralight uppercase sticky top-0
                     flex flex-row items-center gap-2 pt-[50dvh]
-                    w-full">
+                    w-full pointer-events-none">
                     Pourquoi utiliser <Text /> ?
                 </div>
             </div>

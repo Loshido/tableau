@@ -11,6 +11,10 @@ const routes: RouteDefinition[] = [
         component: lazy(() => import('./routes/index'))
     },
     {
+        path: "/auth",
+        component: lazy(() => import('./routes/auth'))
+    },
+    {
         path: "/punch",
         component: lazy(() => import('./routes/punch'))
     },
@@ -27,6 +31,11 @@ render(() => <>
                 before:h-0 hover:before:h-full before:bg-orange px-1 py-0.5 hover:font-semibold transition-[font-weight]
                 hover:before:text-ink before:transition-[height] before:-z-10 z-10">
                 Index
+            </a>
+            <a href="/auth" class="relative before:absolute before:bottom-0 before:left-0 before:w-full 
+                before:h-0 hover:before:h-full before:bg-orange px-1 py-0.5 hover:font-semibold transition-[font-weight]
+                hover:before:text-ink before:transition-[height] before:-z-10 z-10">
+                Auth
             </a>
             <a href="/punch" class="relative before:absolute before:bottom-0 before:left-0 before:w-full 
                 before:h-0 hover:before:h-full before:bg-orange px-1 py-0.5 hover:font-semibold transition-[font-weight]

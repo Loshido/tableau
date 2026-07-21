@@ -26,29 +26,11 @@
     --color-papier: #FFF6E9;
 }
 
-::selection{
-    background-color: var(--color-orange);
-    color: var(--color-papier);
+:has(.bg-papier) {
+    @apply selection:bg-orange selection:text-papier
 }
-
-.animate-title {
-  transition: opacity 1s ease, transform 1s ease;
-}
-
-.opacity-0 {
-    opacity: 0;
-}
-
-.opacity-100 {
-    opacity: 1;
-}
-
-.translate-y-10 {
-    transform: translateY(2rem);
-}
-
-.translate-y-0 {
-    transform: translateY(0);
+:has(.bg-orange) {
+    @apply selection:bg-papier selection:text-orange
 }
 
 html {
