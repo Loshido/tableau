@@ -33,6 +33,8 @@ export default () => <div class="bg-papier min-h-screen w-screen">
             "Sur ton téléphone, sur ton ordinateur..."
         ]}/>
     
+    <PunchDiamondsTeeth from="orange" to="ink" style="margin-left: -12px;z-index:0;overflow:hidden;
+        width: calc(100% + 12px);margin-top:0px;" />
     <SloganInscription/>
     <Footer/>
 </div>

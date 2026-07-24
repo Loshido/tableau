@@ -1,5 +1,6 @@
-.punch-diamonds-teeth{ height:12px; background-color:var(--a); }
+.punch-diamonds-teeth{ height:12px; background-color:var(--a); z-index: 1; }
 .punch-diamonds-teeth::before{
+    z-index: 10;
     content:""; position:absolute; inset:0; background-color:var(--b);
     -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='12'%3E%3Cpolygon points='12,3 21,12 12,21 3,12' fill='white'/%3E%3C/svg%3E");
     mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='12'%3E%3Cpolygon points='12,3 21,12 12,21 3,12' fill='white'/%3E%3C/svg%3E");

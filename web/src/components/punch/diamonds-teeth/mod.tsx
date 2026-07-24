@@ -1,8 +1,19 @@
 import "./style.css"
+import type { JSX } from "solid-js"
 
-export default (props: { from?: string, to?: string } = { from: "orange", to: "navy" }) => {{
-    const from = props.from || "orange"
-    const to = props.to || "navy"
-    return <div style={`--a: var(--color-${from});--b: var(--color-${to})`}
-        class="punch-diamonds-teeth w-full relative overflow-hidden"/>
+type Props = {
+    from?: string, to?: string
+} & JSX.DOMAttributes<HTMLDivElement>
+
+// export default (props: JSX.DOMAttributes<SVGSVGElement>) => <svg viewBox="0 0 24 24" 
+//     {...props}
+//     fill="none" >
+//     <path d="m9 18 6-6-6-6"/>
+// </svg>
+
+export default ({from, to, ...props}: Props = { from: "orange", to: "navy" }) => {{
+    const colorFrom = from || "orange"
+    const colorTo = to || "navy"
+    return <div {...props} style={`--a: var(--color-${colorFrom});--b: var(--color-${colorTo});` + (props.style ?? '')}
+        class={"punch-diamonds-teeth w-full relative overflow-hidden " + (props.class ?? '')}/>
 }}
