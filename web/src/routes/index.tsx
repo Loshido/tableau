@@ -21,7 +21,7 @@ export default () => <div class="bg-papier min-h-screen w-screen">
     <Hero/>
     <PunchDiamonds to="papier"/>
     <Evenements/>
-    <PunchDiamondsTeeth from="papier" to="orange" />
+    <PunchDiamondsTeeth from="papier" to="orange" class="-mb-1" />
     <Fonctions 
         hauteur_fn={35}
         fns={[

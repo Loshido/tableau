@@ -21,7 +21,7 @@ const routes: RouteDefinition[] = [
 ]
 
 render(() => <>
-    <header class="py-4 px-4 md:px-8 lg:px-[5vw] xl:px-[23vw]
+    {/* <header class="py-4 px-4 md:px-8 lg:px-[5vw] xl:px-[23vw]
         uppercase text-xs font-mono font-semibold bg-papier text-ink">
         <p class="text-orange">
             Debug
@@ -43,6 +43,6 @@ render(() => <>
                 Punch
             </a>
         </nav>
-    </header>
+    </header> */}
     <Router>{routes}</Router>
 </>, document.getElementById('root')!);
