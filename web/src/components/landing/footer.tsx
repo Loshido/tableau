@@ -5,12 +5,14 @@ export default function Footer() {
             Le Tableau - fait par des étudiants, pour des étudiants.
         </p>
         <nav class="flex flex-row items-center gap-2 -mx-1">
-            <a href="" class="relative before:absolute before:bottom-0 before:left-0 before:w-full 
+			<a href="mailto:loshido+tableau@pm.me"
+				class="relative before:absolute before:bottom-0 before:left-0 before:w-full
                 before:h-0 hover:before:h-full before:bg-orange px-1 py-0.5 hover:font-semibold transition-[font-weight]
                 hover:before:text-ink before:transition-[height] before:-z-10 z-10">
                 Contact
             </a>
-            <a href="" class="relative before:absolute before:bottom-0 before:left-0 before:w-full 
+			<a href="https://github.com/Loshido/tableau" target="_blank"
+				class="relative before:absolute before:bottom-0 before:left-0 before:w-full
                 before:h-0 hover:before:h-full before:bg-orange px-1 py-0.5 hover:font-semibold transition-[font-weight]
                 hover:before:text-ink before:transition-[height] before:-z-10 z-10">
                 Github
