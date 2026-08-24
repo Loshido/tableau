@@ -42,10 +42,10 @@ export default ({ children, ...props }: ComponentProps<'div'>) => {
 			})
 	})
 
-	return <div {...props} class="flex flex-col min-h-svh w-full">
+	return <div class="flex flex-col min-h-svh w-full">
 		<header class="w-full p-4 md:px-8 lg:px-[5vw] xl:px-[23vw] relative
 	    	flex justify-between flex-wrap gap-2 items-center border-b-2 border-ink bg-orange">
-		    <a href="/dash">
+		    <a href="/dash/discover">
 		        <Logo />
 			</a>
 			<nav class="flex flex-row items-center flex-wrap gap-2 font-mono text-sm uppercase select-none *:z-10" ref={nav}>

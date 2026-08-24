@@ -58,7 +58,7 @@ const EVENEMENTS = [
 export default () => {
 	const [selectionCategorie, setSelectionCategorie] = createSignal<number>(0)
 
-	return <main class="w-full h-full bg-papier flex flex-col gap-1
+	return <main class="w-full h-full bg-papier flex flex-col gap-1 flex-1
 		p-4 md:px-8 lg:px-[5vw] lg:py-8 xl:px-[23vw]">
 		<section class="mb-3">
 			<p class="font-mono leading-2 uppercase font-light text-orange text-sm">
@@ -70,7 +70,7 @@ export default () => {
 		</section>
 
 		<section class="flex flex-row gap-2 font-mono md:font-light uppercase snap-mandatory snap-x overflow-x-auto
-			scrollbar-thumb-orange scrollbar-gutter-both pb-2 md:pb-0 min-w-svw h-fit
+			scrollbar-thumb-orange pb-2 md:pb-0 h-fit min-w-0
 			scroll-pl-4 md:scroll-pl-8 lg:scroll-pl-[5vw] xl:scroll-pl-[23vw]
 			-mx-4 md:-mx-8 lg:mx-[-5vw] xl:mx-[-23vw]">
 			<For each={CATEGORIES}>
@@ -87,12 +87,13 @@ export default () => {
 		</section>
 
 		<input id="event-search" type="search" placeholder="Rechercher, ex: Nuit du code"
-			class="px-4 py-2 border-4 select-none cursor-pointer snap-start text-nowrap rounded-none outline-none w-full md:w-1/3
+			class="px-4 py-2 border-4 select-none snap-start text-nowrap rounded-none outline-none w-full md:w-1/3
 			mb-3"/>
 
 		<section class="grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-4">
 			<For each={EVENEMENTS}>
 				{evenement => <EventCard
+					href={`/dash/events/b?back=/dash/discover`}
 					titre={evenement.titre}
 					date={evenement.date}
 					association={evenement.association}

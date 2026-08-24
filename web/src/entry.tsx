@@ -41,9 +41,13 @@ const routes: RouteDefinition[] = [
 				component: lazy(() => import("./routes/dash/profil/index"))
 			},
 			{
-				path: "/*",
-				component: lazy(() => import("./routes/dash/index"))
-			}
+				path: "/events/:id",
+				component: lazy(() => import("./routes/dash/events/index"))
+			},
+			{
+				path: "/associations/:id",
+				component: lazy(() => import("./routes/dash/associations/index"))
+			},
 		]
     },
 ]

@@ -1,4 +1,5 @@
-import { For } from "solid-js"
+import { useLocation } from "@solidjs/router"
+import { createMemo, For } from "solid-js"
 import EventCard from "~/components/event/card"
 
 const EVENEMENTS = [
@@ -47,29 +48,47 @@ const EVENEMENTS = [
 ]
 
 export default () => {
-	return <main class="w-full h-full bg-papier flex flex-col gap-1 flex-1
+	const location = useLocation()
+	const back = createMemo(() => {
+		if ("back" in location.query
+			&& typeof location.query["back"] === "string"
+			&& location.query["back"].startsWith('/dash/')) {
+			return location.query["back"]
+		}
+		return "/dash/discover"
+	})
+
+	return <main class="w-full h-full bg-papier flex flex-col gap-8 flex-1
 		p-4 md:px-8 lg:px-[5vw] lg:py-8 xl:px-[23vw]">
-		<section class="mb-3">
-			<p class="font-mono leading-2 uppercase font-light text-orange text-sm">
-				TON ESPACE
+		<a href={back()} class="px-4 py-2 border-4 select-none cursor-pointer font-mono md:font-light uppercase w-fit
+			hover:font-black transition-[font-weight,background-color,color] hover:bg-ink hover:text-papier border-ink
+			text-sm md:text-base">
+			← Retour au tableau
+		</a>
+
+	 	<section class="relative p-4 sm:p-6 md:p-8 border-4 border-ink bg-navy flex flex-col">
+			<p class="text-sm font-mono text-orange uppercase leading-2">
+				Vitrine Association
 			</p>
-			<h2 class="font-display leading-8 font-black text-2xl uppercase">
-				Mes inscriptions
+			<h2 class="text-4xl sm:text-6xl leading-24 md:text-8xl font-black text-papier uppercase">
+				IsenEngineering
 			</h2>
+			<p class="text-xl text-white w-2/3">
+				L'association qui fait vivre le campus. Soirées, intégration, week-ends et évènements majeurs.
+			</p>
+			<div class="flex flex-row gap-1 items-center mt-4">
+				<div class="px-2 py-1 bg-papier text-ink">2 Évènements au tableau</div>
+			</div>
 		</section>
 
-		<input id="event-search" type="search" placeholder="Rechercher, ex: Nuit du code"
-			class="px-4 py-2 border-4 select-none cursor-pointer snap-start text-nowrap rounded-none outline-none w-full md:w-1/3
-			mb-3"/>
-
-		<h3 class="font-display leading-8 font-black text-xl uppercase mt-4">
-			évènements à venir <span class="text-orange">[5]</span>
-		</h3>
+		<h2 class="font-display leading-8 font-black text-2xl uppercase">
+			évènements à venir
+		</h2>
 
 		<section class="grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-4">
 			<For each={EVENEMENTS}>
 				{evenement => <EventCard
-					href={`/dash/events/a?back=/dash/registrations`}
+					href={`/dash/events/b?back=/dash/discover`}
 					titre={evenement.titre}
 					date={evenement.date}
 					association={evenement.association}
@@ -81,14 +100,14 @@ export default () => {
 				/>}
 			</For>
 		</section>
-
-		<h3 class="font-display leading-8 font-black text-xl uppercase mt-4">
-			évènements passés <span class="text-orange">[4]</span>
-		</h3>
+		<h2 class="font-display leading-8 font-black text-2xl uppercase">
+			évènements organisés
+		</h2>
 
 		<section class="grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-4">
 			<For each={EVENEMENTS}>
 				{evenement => <EventCard
+					href={`/dash/events/b?back=/dash/discover`}
 					titre={evenement.titre}
 					date={evenement.date}
 					association={evenement.association}
