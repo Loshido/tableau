@@ -1,8 +1,8 @@
 import Logo from "~/components/logo/mod"
 import Navigation from "./layout-nav"
-import { ComponentProps } from "solid-js"
+import { ParentProps } from "solid-js"
 
-export default ({ children, ...props }: ComponentProps<'div'>) => {
+export default ({ children }: ParentProps) => {
 	return <div class="flex flex-col min-h-svh w-full ">
 		<header class="w-full p-4 md:px-8 lg:px-[5vw] xl:px-[23vw] sticky top-0 left-0 isolate z-50
 	    	flex justify-between flex-wrap gap-2 items-center border-b-2 border-ink bg-orange">

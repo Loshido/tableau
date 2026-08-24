@@ -1,11 +1,10 @@
 import Navigation from "./layout-nav"
-import { ComponentProps, onMount } from "solid-js";
+import { onSettled, ParentProps } from "solid-js";
 import Logo from "~/components/logo/mod"
 
-const createListener = (slide: HTMLDivElement, rects: Map<Element, DOMRect>) => {
+const createListener = (slide: HTMLDivElement) => {
 	return (event: MouseEvent) => {
 		const target = event.target as HTMLAnchorElement
-		// const rect = rects.get(target)
 		const rect = target.getBoundingClientRect()
 		if (target.tagName !== "A" || !rect) return
 		if (slide.getAttribute('slide-in') === target.href) return
@@ -19,15 +18,14 @@ const createListener = (slide: HTMLDivElement, rects: Map<Element, DOMRect>) => 
 	}
 }
 
-export default ({ children, ...props }: ComponentProps<'div'>) => {
+export default ({ children }: ParentProps) => {
 	let nav: HTMLElement | undefined;
 	let slider: HTMLDivElement | undefined
 
-	onMount(() => {
+	onSettled(() => {
 		if (!nav || !slider) return
-		const rects = new Map<Element, DOMRect>()
 
-		const listener = createListener(slider, rects)
+		const listener = createListener(slider)
 		nav.parentNode?.addEventListener('mouseout', e => {
 			const target = e.target as HTMLElement | null
 			if(!target || target.tagName !== "HEADER") return
@@ -36,10 +34,7 @@ export default ({ children, ...props }: ComponentProps<'div'>) => {
 		})
 
 		nav.querySelectorAll<HTMLAnchorElement>('a')
-			.forEach(link => {
-				rects.set(link, link.getBoundingClientRect())
-				link.addEventListener('mouseover', listener)
-			})
+			.forEach(link => link.addEventListener('mouseover', listener))
 	})
 
 	return <div class="flex flex-col min-h-svh w-full">

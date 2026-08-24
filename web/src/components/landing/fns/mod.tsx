@@ -1,6 +1,7 @@
-import { createSignal, For, onCleanup, onMount } from "solid-js";
+import { createSignal, For } from "solid-js";
 import { Text } from "~/components/logo/mod";
 import "./animation.css"
+import { onSettled } from "solid-js";
 
 interface FonctionsProps {
     fns: string[],
@@ -8,8 +9,8 @@ interface FonctionsProps {
 }
 
 export default function Fonctions({ fns, hauteur_fn }: FonctionsProps) {
-    const [activeIndex, setActiveIndex] = createSignal(0)
-    onMount(() => {
+	const [activeIndex, setActiveIndex] = createSignal(0)
+    onSettled(() => {
         const observer = new IntersectionObserver(entries => entries.forEach(entry => {
             const index = parseInt(entry.target.getAttribute('data-index') || '0')
             const intersecting = entry.isIntersecting
@@ -18,10 +19,11 @@ export default function Fonctions({ fns, hauteur_fn }: FonctionsProps) {
         }), {
         })
 
-        document.querySelectorAll('.fonction').forEach(fn => observer.observe(fn))
-        onCleanup(() => observer.disconnect())
+		document.querySelectorAll('.fonction').forEach(fn => observer.observe(fn))
+
+		return () =>  observer.disconnect()
     })
-    
+
 
     return <section class="fns px-4 md:px-8 lg:px-[5vw] xl:px-[23vw] bg-orange text-papier relative">
         <svg xmlns="http://www.w3.org/2000/svg" class="absolute top-0 left-0 h-full"

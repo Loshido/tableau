@@ -1,15 +1,9 @@
+import { JSX } from "@solidjs/web/jsx-runtime"
 import "./style.css"
-import type { JSX } from "solid-js"
 
 type Props = {
     from?: string, to?: string
-} & JSX.DOMAttributes<HTMLDivElement>
-
-// export default (props: JSX.DOMAttributes<SVGSVGElement>) => <svg viewBox="0 0 24 24" 
-//     {...props}
-//     fill="none" >
-//     <path d="m9 18 6-6-6-6"/>
-// </svg>
+} & JSX.ElementAttributes<HTMLDivElement>
 
 export default ({from, to, ...props}: Props = { from: "orange", to: "navy" }) => {{
     const colorFrom = from || "orange"
