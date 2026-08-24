@@ -4,17 +4,17 @@ export default () => {
 	const location = useLocation()
 
 	return <>
-		<a href="/dash/discover" class="px-4 py-2 bg-ink/25 hover:bg-ink text-papier flex flex-row items-center gap-2
+		<a href="/dash/discover" class="px-4 py-2 bg-ink/15 hover:bg-ink text-papier flex flex-row items-center gap-2
 		   	font-normal hover:font-black transition-[font-weight,background-color]"
 			style={location.pathname.startsWith("/dash/discover") ? "background: var(--color-ink)" : ""}>
 			Découvrir
 		</a>
-		<a href="/dash/registrations" class="px-4 py-2 bg-ink/25 hover:bg-ink text-papier flex flex-row items-center gap-2
+		<a href="/dash/registrations" class="px-4 py-2 bg-ink/15 hover:bg-ink text-papier flex flex-row items-center gap-2
 		   	transition-[font-weight,background-color]"
 			style={location.pathname.startsWith("/dash/registrations") ? "background: var(--color-ink)" : ""}>
 			Mes Inscriptions
 		</a>
-		<a href="/dash/organization" class="px-4 py-2 bg-ink/25 hover:bg-ink text-papier flex flex-row items-center gap-2
+		<a href="/dash/organization" class="px-4 py-2 bg-ink/15 hover:bg-ink text-papier flex flex-row items-center gap-2
 		   	font-normal hover:font-black transition-[font-weight,background-color]"
 			style={location.pathname.startsWith("/dash/organization") ? "background: var(--color-ink)" : ""}>
 			Espace Organisation

@@ -19,7 +19,6 @@ const createListener = (slide: HTMLDivElement, rects: Map<Element, DOMRect>) => 
 	}
 }
 
-
 export default ({ children, ...props }: ComponentProps<'div'>) => {
 	let nav: HTMLElement | undefined;
 	let slider: HTMLDivElement | undefined
@@ -43,14 +42,14 @@ export default ({ children, ...props }: ComponentProps<'div'>) => {
 			})
 	})
 
-	return <div {...props} class="flex flex-col h-full w-full">
+	return <div {...props} class="flex flex-col min-h-svh w-full">
 		<header class="w-full p-4 md:px-8 lg:px-[5vw] xl:px-[23vw] relative
 	    	flex justify-between flex-wrap gap-2 items-center border-b-2 border-ink bg-orange">
 		    <a href="/dash">
 		        <Logo />
 			</a>
 			<nav class="flex flex-row items-center flex-wrap gap-2 font-mono text-sm uppercase select-none *:z-10" ref={nav}>
-				<div ref={slider} class="opacity-0 cursor-pointer z-0 absolute bg-ink
+				<div ref={slider} class="opacity-0 cursor-pointer z-0 absolute bg-ink/75
 					pointer-events-none transition-[top,left,width,height,opacity]" />
 			    <Navigation/>
 		    </nav>

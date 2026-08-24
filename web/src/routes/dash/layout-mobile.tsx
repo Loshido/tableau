@@ -3,8 +3,8 @@ import Navigation from "./layout-nav"
 import { ComponentProps } from "solid-js"
 
 export default ({ children, ...props }: ComponentProps<'div'>) => {
-	return <div {...props} class="flex flex-col h-full w-full">
-		<header class="w-full p-4 md:px-8 lg:px-[5vw] xl:px-[23vw] relative
+	return <div {...props} class="flex flex-col min-h-svh w-full ">
+		<header class="w-full p-4 md:px-8 lg:px-[5vw] xl:px-[23vw] sticky top-0 left-0 isolate z-50
 	    	flex justify-between flex-wrap gap-2 items-center border-b-2 border-ink bg-orange">
 		    <a href="/dash">
 		        <Logo />
@@ -25,22 +25,22 @@ export default ({ children, ...props }: ComponentProps<'div'>) => {
 					background-color: var(--color-orange);
 				}
 
-				:has(#dropdown-checkbox:not(:checked)) .down {
+				:has(#dropdown-checkbox:checked) .down {
 					transition: transform .3s ease;
 					transform-origin: 50% 75%;
 					transform: scaleY(-1);
 				}
-				:has(#dropdown-checkbox:checked) .down {
+				:has(#dropdown-checkbox:not(:checked)) .down {
 					transition: transform .3s ease;
 					transform-origin: 50% 75%;
 					transform: scaleY(1);
 				}
-				:has(#dropdown-checkbox:not(:checked)) .up {
+				:has(#dropdown-checkbox:checked) .up {
 					transition: transform .3s ease;
 					transform-origin: 50% 25%;
 	    			transform: scaleY(-1);
 				}
-				:has(#dropdown-checkbox:checked) .up {
+				:has(#dropdown-checkbox:not(:checked)) .up {
 					transition: transform .3s ease;
 		  			transform-origin: 50% 25%
 					transform: scaleY(1);
@@ -48,9 +48,13 @@ export default ({ children, ...props }: ComponentProps<'div'>) => {
 				header:has(#dropdown-checkbox:checked) > nav {
 					display: flex;
 				}
+				html:has(#dropdown-checkbox:checked) {
+					overflow: hidden
+				}
+
 			`}</style>
 			<nav class="hidden absolute flex-col items-start flex-nowrap gap-4 top-full left-0 bg-orange p-4
-				h-[calc(100svh-100%)] w-full isolate font-mono text-2xl uppercase"
+				h-[calc(100svh-100%)] w-full font-mono text-2xl uppercase"
 				onClick={e => {
 					const target = e.target as HTMLElement | null
 					const checkbox = document.getElementById('dropdown-checkbox') as HTMLInputElement | null
