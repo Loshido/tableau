@@ -68,7 +68,7 @@ export default () => {
 				}
 			</For>
 
-			<a href="" class="px-4 py-2 bg-ink text-papier w-fit mt-8
+			<a href="/dash" class="px-4 py-2 bg-ink text-papier w-fit mt-8
 				font-mono text-sm uppercase font-normal hover:font-black transition-[font-weight]">
 				Accéder au tableau
             </a>
