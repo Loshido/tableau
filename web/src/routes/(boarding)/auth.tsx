@@ -1,4 +1,4 @@
-import { onMount } from "solid-js";
+import { onSettled } from "solid-js";
 import Header from "~/components/header";
 import "~/components/auth/style.css"
 
@@ -34,7 +34,7 @@ const randomizeTableau = (tableau: HTMLDivElement) => {
 }
 
 export default () => {
-    onMount(() => {
+    onSettled(() => {
         const tableaux = document.querySelectorAll<HTMLDivElement>('.tableau')
 
         tableaux.forEach(tableau => {

@@ -24,7 +24,7 @@ const Evenement = () => <article class="h-full xl:w-[33vw] border-5 border-ink r
             Le grand départ. Deux jours pour rencontrer ta promo avant même la première rentrée des cours.
         </p>
 
-        <a href="#" class="text-orange uppercase font-stretch-50% text-sm hover:font-medium 
+        <a href="#" class="text-orange uppercase font-stretch-50% text-sm hover:font-medium
             transition-[font-weight] flex flex-row items-center gap-1 group">
             En savoir plus <Chevron class="w-3 h-3 stroke-orange stroke-3 group-hover:stroke-4 transition-[stroke]"/>
         </a>
@@ -37,7 +37,7 @@ function scrollToLeft() {
     const events = document.getElementById("events") as HTMLDivElement
     const article = events.querySelector('article') as HTMLDivElement
     const articleWidth = article.getBoundingClientRect().width
-    const left = events.scrollLeft - GAP - articleWidth  
+    const left = events.scrollLeft - GAP - articleWidth
 
     events.scrollTo({
         top: 0,
@@ -49,7 +49,7 @@ function scrollToRight() {
     const events = document.getElementById("events") as HTMLDivElement
     const article = events.querySelector('article') as HTMLDivElement
     const articleWidth = article.getBoundingClientRect().width
-    const left = events.scrollLeft + GAP + articleWidth  
+    const left = events.scrollLeft + GAP + articleWidth
 
     events.scrollTo({
         top: 0,
@@ -65,7 +65,7 @@ export default function Evenements() {
         <p class="text-3xl font-display font-bold uppercase w-3/5 mb-2">
             Les temps forts, du premier jour à la remise des diplômes.
         </p>
-        
+
         <div class="relative mb-8">
             <p>
                 Une sélection des rendez-vous qui rythment l'année et dessinent la vie étudiante de l'école.
@@ -82,7 +82,7 @@ export default function Evenements() {
         </div>
 
         <div id="events" class="h-[66vh] w-screen overflow-x-auto flex flex-row gap-4
-            -mx-4 md:-mx-8 lg:-mx-[5vw] xl:-mx-[23vw] scroll-mt-1
+            -mx-4 md:-mx-8 lg:mx-[-5vw] xl:mx-[-23vw] scroll-mt-1
             px-4 md:px-8 lg:px-[5vw] xl:px-[23vw]
             scrollbar-none snap-mandatory snap-x
             ">
