@@ -9,9 +9,9 @@ export default () => <>
 	   	transition-[font-weight,background-color] data-active:bg-ink">
 		Mes Inscriptions
 	</a>
-	<a href="/dash/organization" class="px-4 py-2 bg-ink/15 hover:bg-ink text-papier flex flex-row items-center gap-2
+	<a href="/dash/manage" class="px-4 py-2 bg-ink/15 hover:bg-ink text-papier flex flex-row items-center gap-2
 	   	font-normal hover:font-black transition-[font-weight,background-color] data-active:bg-ink">
-		Espace Organisation
+		Gestion
 	</a>
 	<a href="/dash/profil" class="px-4 py-2 bg-ink text-papier flex flex-row items-center gap-2
 	   font-normal hover:font-black transition-[font-weight] data-active:font-black">

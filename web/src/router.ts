@@ -9,11 +9,11 @@ export const Router = createRouter({
 	    },
 	    {
 	        path: "/auth",
-	        component: lazy(() => import('./routes/(boarding)/auth'))
+	        component: lazy(() => import('./routes/boarding/auth'))
 	    },
 	    {
 	        path: "/boarding/associations",
-	        component: lazy(() => import('./routes/(boarding)/associations'))
+	        component: lazy(() => import('./routes/boarding/associations'))
 	    },
 	    {
 			path: "/dash",
@@ -30,8 +30,12 @@ export const Router = createRouter({
 					component: lazy(() => import("./routes/dash/registrations/index"))
 				},
 				{
-					path: "/organization",
-					component: lazy(() => import("./routes/dash/organization/index"))
+					path: "/manage",
+					component: lazy(() => import("./routes/dash/manage/index")),
+				},
+				{
+					path: "/manage/events/:id",
+					component: lazy(() => import("./routes/(manage)/event")),
 				},
 				{
 					path: "/profil",

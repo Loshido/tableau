@@ -17,8 +17,15 @@
         "vite": "^8.2.2"
     },
     "dependencies": {
+        "@domternal/core": "^0.15.0",
+        "@domternal/extension-block-controls": "^0.15.0",
+        "@domternal/extension-code-block-lowlight": "^1.0.0",
+        "@domternal/extension-image": "^1.0.1",
+        "@domternal/theme": "^0.15.0",
+        "@domternal/vanilla": "^0.15.0",
         "@solidjs/router": "^2.0.0-next.17",
         "@solidjs/web": "^2.0.0-rc.1",
+        "lowlight": "^3.3.0",
         "solid-js": "^2.0.0-rc.1"
     }
 }
