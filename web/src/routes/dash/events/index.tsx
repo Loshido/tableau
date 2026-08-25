@@ -1,6 +1,3 @@
-import { useLocation } from "@solidjs/router"
-import { createMemo } from "solid-js"
-
 const EVENEMENTS = [
 	{
 		date: new Date(Date.now() + Math.floor(Math.random() * 1000 * 60 * 60 * 24 * 300)),
@@ -31,20 +28,10 @@ const EVENEMENTS = [
 ]
 
 export default () => {
-	const location = useLocation()
-
-	const back = createMemo(() => {
-		if ("back" in location.query
-			&& typeof location.query["back"] === "string"
-			&& location.query["back"].startsWith('/dash/')) {
-			return location.query["back"]
-		}
-		return "/dash/discover"
-	})
 	const event = EVENEMENTS[Math.floor(Math.random() * 3)]
 	return <main class="w-full h-full bg-papier flex flex-col gap-8 flex-1
 		p-4 md:px-8 lg:px-[5vw] lg:py-8 xl:px-[23vw]">
-		<a href={back()} class="px-4 py-2 border-4 select-none cursor-pointer font-mono md:font-light uppercase w-fit
+		<a onClick={() => window.history.back()} class="px-4 py-2 border-4 select-none cursor-pointer font-mono md:font-light uppercase w-fit
 			hover:font-black transition-[font-weight,background-color,color] hover:bg-ink hover:text-papier border-ink
 			text-sm md:text-base">
 			← Retour au tableau

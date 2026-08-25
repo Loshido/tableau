@@ -32,8 +32,8 @@ export default (props: { xp: number, xp_max: number }) => <section
 	<div class="flex flex-col">
 		<p class="text-sm font-mono text-ink uppercase leading-2">Solde d'engagement</p>
 		<h2 class="text-5xl sm:text-6xl md:text-8xl font-black text-ink">
-			{props.xp}<span class="text-2xl sm:text-3xl md:text-4xl">XP </span>
-			<span class="text-ink/20">/{props.xp_max}<span class="text-2xl sm:text-3xl md:text-4xl">XP</span></span>
+			{props.xp}<span class="text-lg sm:text-xl md:text-2xl">XP </span>
+			<span class="text-ink/20 text-lg sm:text-xl md:text-2xl">/{props.xp_max}<span class="text-xs">XP</span></span>
 		</h2>
 	</div>
 </section>
