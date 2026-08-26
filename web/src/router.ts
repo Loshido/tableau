@@ -38,8 +38,24 @@ export const Router = createRouter({
 					component: lazy(() => import("./routes/(manage)/event")),
 				},
 				{
+					path: "/manage/associations/:id",
+					component: lazy(() => import("./routes/(manage)/association")),
+				},
+				{
+					path: "/manage/associations/operators/:id",
+					component: lazy(() => import("./routes/(manage)/operators")),
+				},
+				{
 					path: "/profil",
 					component: lazy(() => import("./routes/dash/profil/index"))
+				},
+				{
+					path: "/support/report",
+					component: lazy(() => import("./routes/(support)/report"))
+				},
+				{
+					path: "/support/my-data",
+					component: lazy(() => import("./routes/(support)/data"))
 				},
 				{
 					path: "/events/:id",

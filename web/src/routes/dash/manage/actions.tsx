@@ -7,7 +7,7 @@ export default () => <>
 			Planifier un évènement<sup class="uppercase font-black">todo</sup>
 		</p>
 	</a>
-	<a
+	<a href="/dash/manage/associations/a"
 		class="px-4 py-2 h-fit border-2 border-navy cursor-pointer transition-[translate,box-shadow]
 			hover:-translate-1 hover:shadow-[6px_6px_0_var(--color-ink)]
 			flex flex-col gap-2 items-center justify-center">
@@ -15,7 +15,7 @@ export default () => <>
 			Modifier la vitrine<sup class="uppercase font-black">todo</sup>
 		</p>
 	</a>
-	<a
+	<a href="/dash/manage/associations/operators/a"
 		class="px-4 py-2 h-fit border-2 border-navy cursor-pointer transition-[translate,box-shadow]
 			hover:-translate-1 hover:shadow-[6px_6px_0_var(--color-ink)]
 			flex flex-col gap-2 items-center justify-center">

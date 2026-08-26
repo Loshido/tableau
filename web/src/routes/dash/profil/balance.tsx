@@ -26,7 +26,7 @@ const STYLE = `
 export default (props: { xp: number, xp_max: number }) => <section
 	class="relative p-4 sm:p-6 md:p-8 border-2 border-ink flex flex-row items-center justify-between z-0">
 	<div class="absolute top-0 left-0 bg-orange h-full w-(--chargement) -z-10
-		punch-diamonds-duo shining animate-[adjusting_1s_ease]"
+		punch-diamonds-duo shining animate-[adjusting_1s_ease-in-out]"
 		style={`--chargement: ${Math.round(props.xp / props.xp_max * 100)}%;`} />
 	<style>{STYLE}</style>
 	<div class="flex flex-col">

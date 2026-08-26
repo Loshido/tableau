@@ -1,0 +1,40 @@
+{
+	"name": "Le Tableau",
+	"short_name": "Tableau",
+	"start_url": "/dash/discover?pwa,
+	"display": "standalone",
+	"background_color": "#FF4B1F",
+	"theme_color": "#FF4B1F",
+	"categories": ["entertainment"],
+	"description": "Une plateforme indexant les évènements de l'ISEN pour ses étudiants",
+	"scope": "/dash/",
+	"shortcuts": [
+		{
+			"name": "Mes inscriptions",
+			"url": "/dash/registrations"
+	],
+	"icons": [
+		{
+			"src": "/fav-dark.svg",
+			"type": "image/svg+xml",
+		},
+		{
+			"src": "/pwa-192.png",
+			"type": "image/png",
+		},
+		{
+			"src": "/pwa-512.svg",
+			"type": "image/png",
+		},
+		{
+			"src": "/fav-dark-64.png",
+			"sizes": "64x64",
+			"type": "image/png",
+		},
+		{
+			"src": "/fav-dark-256.png",
+			"sizes": "256x256",
+			"type": "image/png",
+		}
+	]
+}

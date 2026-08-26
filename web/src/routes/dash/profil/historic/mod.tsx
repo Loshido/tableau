@@ -1,6 +1,7 @@
 import { createSignal, createMemo, For, onSettled } from "solid-js"
 import { EVENTS } from "./placeholder"
 import { useNavigate } from "@solidjs/router"
+import animateScroll from "./scroll"
 
 const STEP_X = 140
 const PADDING_X = 100
@@ -65,10 +66,10 @@ export default function InteractiveTimeline() {
 	onSettled(() => {
 		if(!scrollRef) return
 		// positionement à l'évènement le plus proche
-		const width = scrollRef.clientWidth || 0
-		scrollRef.scrollTo(x_now[1] - width / 2, 0)
-
 		scrollRef.addEventListener("wheel", handleWheel, { passive: false })
+
+		const width = scrollRef.clientWidth || 0
+		animateScroll(scrollRef, x_now[1] - width / 2)
 		return () => scrollRef.removeEventListener("wheel", handleWheel)
 	})
 

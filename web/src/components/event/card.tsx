@@ -17,9 +17,10 @@ const STAR = <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-w
 </svg>
 
 export default (event: EventProps) => <a href={event.href}
-	class="grid grid-rows-9 h-64 border-2 border-navy cursor-pointer transition-[translate,box-shadow]
+	class="flex flex-col border-2 border-navy cursor-pointer transition-[translate,box-shadow]
 		hover:-translate-1 hover:shadow-[6px_6px_0_var(--color-ink)]">
-	<div class="row-span-5 relative bg-navy flex items-center justify-center overflow-hidden">
+	<div class="flex-1 relative bg-navy flex items-center justify-center overflow-hidden
+		aspect-5/2">
 		{/* Association en tant que placeholder */}
 		<p class="w-fit uppercase text-2xl text-papier/25 select-none">{event.association}</p>
 
@@ -48,7 +49,7 @@ export default (event: EventProps) => <a href={event.href}
 			</div>}
 		</div>
 	</div>
-	<div class="row-span-4 p-4">
+	<div class="p-4">
 		<h2 class="font-bold font-display text-xl leading-8">{event.titre}</h2>
 		{
 			(event.association !== undefined || event.lieu !== undefined) && <>
