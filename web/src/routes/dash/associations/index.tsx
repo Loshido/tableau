@@ -1,5 +1,4 @@
-import { useLocation } from "@solidjs/router"
-import { createMemo, For } from "solid-js"
+import { For } from "solid-js"
 import EventCard from "~/components/event/card"
 
 const EVENEMENTS = [
@@ -48,19 +47,9 @@ const EVENEMENTS = [
 ]
 
 export default () => {
-	const location = useLocation()
-	const back = createMemo(() => {
-		if ("back" in location.query
-			&& typeof location.query["back"] === "string"
-			&& location.query["back"].startsWith('/dash/')) {
-			return location.query["back"]
-		}
-		return "/dash/discover"
-	})
-
 	return <main class="w-full h-full bg-papier flex flex-col gap-8 flex-1
 		p-4 md:px-8 lg:px-[5vw] lg:py-8 xl:px-[23vw]">
-		<a href={back()} class="px-4 py-2 border-4 select-none cursor-pointer font-mono md:font-light uppercase w-fit
+		<a onClick={() => window.history.back()} class="px-4 py-2 border-4 select-none cursor-pointer font-mono md:font-light uppercase w-fit
 			hover:font-black transition-[font-weight,background-color,color] hover:bg-ink hover:text-papier border-ink
 			text-sm md:text-base">
 			← Retour au tableau
@@ -73,7 +62,7 @@ export default () => {
 			<h2 class="text-4xl sm:text-6xl leading-24 md:text-8xl font-black text-papier uppercase">
 				IsenEngineering
 			</h2>
-			<p class="text-xl text-white w-2/3">
+			<p class="text-xl text-papier w-2/3">
 				L'association qui fait vivre le campus. Soirées, intégration, week-ends et évènements majeurs.
 			</p>
 			<div class="flex flex-row gap-1 items-center mt-4">

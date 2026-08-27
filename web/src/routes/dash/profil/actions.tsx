@@ -1,8 +1,4 @@
 export default () => <>
-	<p class="font-mono leading-5 uppercase font-light text-orange text-sm mb-2">
-		Actions
-	</p>
-
 	<a class="px-4 py-2 bg-ink/50 hover:bg-ink text-papier flex flex-row items-center gap-2
 		cursor-pointer select-none transition-[font-weight,background-color]">
 		Installer sur votre appareil <sup class="uppercase font-black">todo</sup>

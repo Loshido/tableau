@@ -32,7 +32,7 @@ const EVENEMENTS = [
 	}
 ]
 
-const Editor = lazy(() => import('./editor'))
+const Editor = lazy(() => import('~/components/editor'))
 
 export default () => {
 	const [editionPage, setEditionPage] = createSignal(false)
@@ -84,7 +84,7 @@ export default () => {
 				<div class="font-display text-ink leading-8 font-black text-2xl uppercase">
 					Charger une miniature
 				</div>
-				<p class="font-mono text-xs uppercase text-ink/50">Aspect 5 / 2 - webp</p>
+				<p class="font-mono text-xs uppercase text-ink/50">ratio 5 / 2 - webp</p>
 			</div>
 		</section>
 		<section class="flex flex-col gap-2">

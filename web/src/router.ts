@@ -30,6 +30,14 @@ export const Router = createRouter({
 					component: lazy(() => import("./routes/dash/registrations/index"))
 				},
 				{
+					path: "/register/:id",
+					component: lazy(() => import("./routes/(registration)/form"))
+				},
+				{
+					path: "/register/:id/confirm",
+					component: lazy(() => import("./routes/(registration)/confirm"))
+				},
+				{
 					path: "/manage",
 					component: lazy(() => import("./routes/dash/manage/index")),
 				},

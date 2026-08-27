@@ -9,7 +9,7 @@ export default () => {
 		p-4 md:px-8 lg:px-[5vw] lg:py-8 xl:px-[23vw]">
 		<Balance xp={10000} xp_max={50000}/>
 
-		<section class="mt-4 flex flex-col gap-8 md:flex-row">
+		<section class="mt-4 flex flex-col gap-4 md:flex-row">
 			<div class="flex-7 overflow-auto scrollbar-thumb-orange">
 				<Loading titre="Chargement de la chronologie" class="h-full w-full">
 					<Historic/>

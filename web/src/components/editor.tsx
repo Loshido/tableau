@@ -20,17 +20,17 @@ const STYLE = `
 #editor .ProseMirror ul { list-style: square; }
 #editor .ProseMirror ol { list-style: decimal; }
 #editor.dm-editor.dm-notion-mode .ProseMirror h1 {
-	font-size: 1.5rem;
+	font-size: 2rem;
 	font-weight: 900;
 	fonf-family: var(--font-display);
 }
 #editor.dm-editor.dm-notion-mode .ProseMirror h2 {
-	font-size: 1.25rem;
+	font-size: 1.5rem;
 	font-weight: 800;
 	fonf-family: var(--font-display);
 }
 #editor.dm-editor.dm-notion-mode .ProseMirror h3 {
-	font-size: 1.15rem;
+	font-size: 1.25rem;
 	font-weight: 700;
 	fonf-family: var(--font-display);
 }

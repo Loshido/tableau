@@ -83,11 +83,11 @@ export default () => {
 					- Cas "complet" -> Complet + Liste d'attente
 					- Cas "inscrit" -> Complet/Places disponibles + Inscrit
 					*/}
-				<div class="w-full flex items-center justify-center text-2xl font-black uppercase
+				<a href="/dash/register/a" class="w-full flex items-center justify-center text-2xl font-black uppercase
 					px-4 py-3 select-none cursor-pointer mt-4
 					 bg-orange text-ink  hover:bg-ink hover:text-orange transition-colors">
 					S'inscrire
-				</div>
+				</a>
 			</div>
 		</section>
 	</main>
