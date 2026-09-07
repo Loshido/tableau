@@ -1,3 +1,4 @@
+pub mod middlewares;
 pub mod oidc;
 mod rand;
 pub mod session;

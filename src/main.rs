@@ -6,6 +6,7 @@ pub mod auth;
 pub mod data;
 mod db;
 mod server;
+mod web;
 
 #[derive(Clone)]
 #[allow(unused)]
@@ -31,7 +32,8 @@ async fn main() -> Result<()> {
     let router = axum::Router::new()
         .route("/auth/google", get(api::redirect))
         .route("/auth/verify", get(api::verify))
-        .with_state(shared_state);
+        .with_state(shared_state)
+        .fallback_service(web::web_service());
 
     server::serve(router).await
 }
