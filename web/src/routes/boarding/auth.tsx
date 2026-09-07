@@ -68,7 +68,7 @@ export default () => {
         <div class="tableau hidden w-8 h-8 absolute top-0 left-0 border-8 border-ink z-0 pointer-events-none"/>
         <div class="tableau hidden w-8 h-8 absolute top-0 left-0 border-8 border-ink z-0 pointer-events-none"/>
 
-        <div class="px-4 md:p-0 md:w-2/3 lg:w-1/3 z-10">
+        <div class="px-4 md:p-0 md:w-2/3 xl:w-3/5 2xl:w-1/3 z-10">
             <p class="font-mono font-thin uppercase mb-2">
                 connexion | inscription
             </p>

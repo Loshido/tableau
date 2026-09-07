@@ -30,7 +30,7 @@ const EVENEMENTS = [
 export default () => {
 	const event = EVENEMENTS[Math.floor(Math.random() * 3)]
 	return <main class="w-full h-full bg-papier flex flex-col gap-8 flex-1
-		p-4 md:px-8 lg:px-[5vw] lg:py-8 xl:px-[23vw]">
+		p-4 px-base lg:py-8">
 		<a onClick={() => window.history.back()} class="px-4 py-2 border-4 select-none cursor-pointer font-mono md:font-light uppercase w-fit
 			hover:font-black transition-[font-weight,background-color,color] hover:bg-ink hover:text-papier border-ink
 			text-sm md:text-base">

@@ -38,7 +38,7 @@ export default ({ children }: ParentProps) => {
 	})
 
 	return <div class="flex flex-col min-h-svh w-full">
-		<header class="w-full p-4 md:px-8 lg:px-[5vw] xl:px-[23vw] relative
+		<header class="w-full p-4 px-base relative
 	    	flex justify-between flex-wrap gap-2 items-center border-b-2 border-ink bg-orange">
 		    <a href="/dash/discover">
 		        <Logo />

@@ -12,7 +12,13 @@
 	- [x] Apple Wallet | Google Wallet ?
 
 # Backend
-- [ ] Base de données (Dragonfly)
+- [x] Base de données (Dragonfly)
 - [ ] système de cache client
-- [ ] OIDC Microsoft Entra
+- [ ] OIDC
+	- [ ] Microsoft Entra
+	- [x] Google (temporaire)
 - [ ] S3 | R2
+
+# Idées
+
+- Système de billeterie avec un code à scanner par l'organisateur

@@ -58,7 +58,7 @@ function scrollToRight() {
 }
 
 export default function Evenements() {
-    return <section class="min-h-[80vh] py-16 px-4 md:px-8 lg:px-[5vw] xl:px-[23vw] bg-papier text-ink">
+    return <section class="min-h-[80vh] py-16 px-4 px-base bg-papier text-ink">
         <p class="font-mono font-medium uppercase text-xl font-stretch-150% tracking-widest text-orange-dark mb-2 relative">
             Le programme de l'année
         </p>
@@ -83,7 +83,7 @@ export default function Evenements() {
 
         <div id="events" class="h-[66vh] w-screen overflow-x-auto flex flex-row gap-4
             -mx-4 md:-mx-8 lg:mx-[-5vw] xl:mx-[-23vw] scroll-mt-1
-            px-4 md:px-8 lg:px-[5vw] xl:px-[23vw]
+            px-4 px-base
             scrollbar-none snap-mandatory snap-x
             ">
             <Evenement/>

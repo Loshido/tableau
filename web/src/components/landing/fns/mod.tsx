@@ -25,7 +25,7 @@ export default function Fonctions({ fns, hauteur_fn }: FonctionsProps) {
     })
 
 
-    return <section class="fns px-4 md:px-8 lg:px-[5vw] xl:px-[23vw] bg-orange text-papier relative">
+    return <section class="fns px-4 px-base bg-orange text-papier relative">
         <svg xmlns="http://www.w3.org/2000/svg" class="absolute top-0 left-0 h-full"
             style="width: round(20dvw, 24px); height: round(up, 100%, 24px);z-index:5;">
             <defs>

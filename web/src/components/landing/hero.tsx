@@ -1,10 +1,10 @@
-const AnimatedWords = (props: { words: string[] }) => props.words.map(word => <span 
+const AnimatedWords = (props: { words: string[] }) => props.words.map(word => <span
     class="tracking-normal hover:tracking-wide transition-[letter-spacing]">
     {word}
 </span>)
 
 export default function Hero() {
-    return <section class="min-h-[80vh] py-16 px-4 md:px-8 lg:px-[5vw] xl:px-[23vw]
+    return <section class="min-h-[80vh] py-16 px-4 px-base
         bg-orange text-ink
         bg-linear-0 from-orange to-orange-dark/25">
         <p class="text-sm font-mono font-light uppercase mb-8">
@@ -16,7 +16,7 @@ export default function Hero() {
         <p class="text-lg md:text-2xl mb-4 max-w-2/3">
             <AnimatedWords words={[
                 "Soirées,", " Hackatons,", " galas,",
-                " forums,", " tournois,", " confs" 
+                " forums,", " tournois,", " confs"
             ]}/>... chaque asso poste de son côté.
             Toi, tu regardes <strong>un seul endroit</strong> — et tu ne rates plus rien.
         </p>

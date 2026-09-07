@@ -1,5 +1,5 @@
 export default function SloganInscription() {
-    return <section class="py-32 px-4 md:px-8 lg:px-[5vw] xl:px-[23vw] relative
+    return <section class="py-32 px-4 px-base relative
         border-b border-papier/25 bg-ink text-papier">
         <div class="hidden xl:block absolute left-[20dvw] top-0 w-px -ml-1 h-full
             bg-linear-180 to-25% from-ink to-papier/25"

@@ -6,7 +6,7 @@ const Historic = lazy(() => import('./historic/mod'))
 
 export default () => {
 	return <main class="w-full h-full bg-papier flex flex-col gap-1 flex-1
-		p-4 md:px-8 lg:px-[5vw] lg:py-8 xl:px-[23vw]">
+		p-4 px-base lg:py-8">
 		<Balance xp={10000} xp_max={50000}/>
 
 		<section class="mt-4 flex flex-col gap-4 md:flex-row">

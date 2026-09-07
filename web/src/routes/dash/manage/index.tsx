@@ -54,7 +54,7 @@ const ASSOCIATIONS = [
 
 export default () => {
 	return <main class="w-full h-full bg-papier flex flex-col gap-4 flex-1
-		p-4 md:px-8 lg:px-[5vw] lg:py-8 xl:px-[23vw]">
+		p-4 px-base lg:py-8">
 
 		<div>
 			<p class="font-mono leading-5 uppercase font-light text-orange text-sm">

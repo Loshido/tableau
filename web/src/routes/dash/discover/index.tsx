@@ -59,7 +59,7 @@ export default () => {
 	const [selectionCategorie, setSelectionCategorie] = createSignal<number>(0)
 
 	return <main class="w-full h-full bg-papier flex flex-col gap-1 flex-1
-		p-4 md:px-8 lg:px-[5vw] lg:py-8 xl:px-[23vw]">
+		p-4 px-base lg:py-8">
 		<section class="mb-3">
 			<p class="font-mono leading-2 uppercase font-light text-orange text-sm">
 				Le programme de l'année

@@ -5,7 +5,7 @@ import { LoadingPlaceholder } from "~/components/loading"
 export default () => {
 	const [editionPage, setEditionPage] = createSignal(false)
 	return <main class="w-full h-full bg-papier flex flex-col gap-8 flex-1
-		p-4 md:px-8 lg:px-[5vw] lg:py-8 xl:px-[23vw]">
+		p-4 px-base lg:py-8">
 		<div class="flex flex-row flex-wrap items-center justify-end gap-8">
 			<a href="/dash/manage" class="px-4 py-2 border-4 select-none cursor-pointer font-mono md:font-light uppercase w-fit
 				hover:font-black transition-[font-weight,background-color,color] hover:bg-ink hover:text-papier border-ink

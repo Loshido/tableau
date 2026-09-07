@@ -4,7 +4,7 @@ const Ticket = lazy(() => import("~/components/event/ticket"))
 
 export default () => {
 	return <div class="bg-papier flex-1 h-full w-full flex flex-col gap-4 relative overflow-hidden
-    	p-4 md:px-8 lg:px-[5vw] lg:py-8 xl:px-[23vw]">
+    	p-4 px-base lg:py-8">
 		<section>
 		   	<p class="font-mono uppercase font-light text-orange text-sm">
 				Formulaire d'inscripion

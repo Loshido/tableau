@@ -1,5 +1,5 @@
 export default function Footer() {
-    return <footer class="flex flex-row flex-wrap gap-y-4 items-center justify-between py-8 px-4 md:px-8 lg:px-[5vw] xl:px-[23vw]
+    return <footer class="flex flex-row flex-wrap gap-y-4 items-center justify-between py-8 px-4 px-base
         uppercase text-xs font-mono font-thin bg-ink text-papier">
         <p>
             Le Tableau - fait par des étudiants, pour des étudiants.
