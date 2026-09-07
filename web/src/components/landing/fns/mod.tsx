@@ -26,8 +26,9 @@ export default function Fonctions({ fns, hauteur_fn }: FonctionsProps) {
 
 
     return <section class="fns px-4 px-base bg-orange text-papier relative">
-        <svg xmlns="http://www.w3.org/2000/svg" class="absolute top-0 left-0 h-full"
-            style="width: round(20dvw, 24px); height: round(up, 100%, 24px);z-index:5;">
+		<svg xmlns="http://www.w3.org/2000/svg" class="absolute top-0 left-0 h-full
+        	md:w-8 lg:w-[round(5vw,24px)] xl:w-[round(10vw,24px)] 2xl:w-[round(23vw,24px)]"
+            style="height: round(up, 100%, 24px);z-index:5;">
             <defs>
                 <pattern id="a" width="24" height="24" patternUnits="userSpaceOnUse">
                     <polygon points='12,3 21,12 12,21 3,12' fill='var(--color-orange-dark)'/>

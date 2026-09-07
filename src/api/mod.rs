@@ -4,12 +4,9 @@ use axum::{
     http::StatusCode,
     response::Redirect,
 };
-use serde::{Deserialize, Serialize};
+use serde::Deserialize;
 
-use crate::{
-    SharedHandle,
-    auth::{SessionData, UserInfo},
-};
+use crate::{SharedHandle, auth::oidc::SessionData};
 
 pub async fn redirect(State(handle): State<SharedHandle>) -> Result<Redirect, StatusCode> {
     match handle.oidc.authorization_url(handle.db).await {
@@ -24,22 +21,16 @@ pub struct VerifyQuery {
     state: String,
 }
 
-#[derive(Serialize)]
-pub struct VerifyResponse {
-    pub user: UserInfo,
-    pub session: SessionData,
-}
-
 pub async fn verify(
     State(handle): State<SharedHandle>,
     Query(params): Query<VerifyQuery>,
-) -> Result<Json<VerifyResponse>, StatusCode> {
+) -> Result<Json<SessionData>, StatusCode> {
     match handle
         .oidc
         .exchange_code(params.code, params.state, handle.db)
         .await
     {
-        Ok((user, session)) => Ok(Json(VerifyResponse { user, session })),
+        Ok(session) => Ok(Json(session)),
         Err(_error) => Err(StatusCode::BAD_REQUEST),
     }
 }

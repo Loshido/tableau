@@ -27,7 +27,7 @@
 }
 
 .px-base {
-	@apply  md:px-8 lg:px-[5vw] xl:px-[10vw] 2xl:px-[23vw]
+	@apply md:px-8 lg:px-[5vw] xl:px-[10vw] 2xl:px-[23vw]
 }
 
 :has(.bg-papier) {

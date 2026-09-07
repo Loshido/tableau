@@ -3,16 +3,15 @@ use axum::routing::get;
 
 mod api;
 pub mod auth;
+pub mod data;
 mod db;
 mod server;
-
-extern crate tracing;
 
 #[derive(Clone)]
 #[allow(unused)]
 pub struct SharedHandle {
     db: db::Conn,
-    oidc: auth::OidcClient,
+    oidc: auth::oidc::OidcClient,
 }
 
 #[tokio::main]
@@ -25,7 +24,7 @@ async fn main() -> Result<()> {
 
     let shared_state = SharedHandle {
         db: db::new().await?,
-        oidc: auth::OidcClient::new(client_id, client_secret, "http://localhost/auth/verify")
+        oidc: auth::oidc::OidcClient::new(client_id, client_secret, "http://localhost/auth/verify")
             .await?,
     };
 
