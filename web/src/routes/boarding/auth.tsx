@@ -76,7 +76,7 @@ export default () => {
                 UN SEUL COMPTE. <br/>CELUI DE TON ÉCOLE.
             </h2>
 
-            <a href="/boarding/associations" class="flex flex-row gap-4 items-center mb-4
+            <a rel="external" preload={false} href="/auth/google" class="flex flex-row gap-4 items-center mb-4
                 font-display uppercase px-4 sm:px-8 py-2.5 sm:py-5 w-fit
                 bg-ink hover:bg-orange text-papier select-none cursor-pointer
                 font-normal hover:font-black transition-[font-weight,background-color]">

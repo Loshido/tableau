@@ -42,8 +42,8 @@ impl OidcClient {
     /// génère le lien de redirection vers Google, en enregistrant au
     /// préalable un `state` et un `nonce` associés pour la vérification
     /// ultérieure du callback.
-    pub async fn authorization_url(&self, mut conn: db::Conn) -> Result<String> {
-        let (state, nonce) = state::register_state(&mut conn).await?;
+    pub async fn authorization_url(&self, conn: &mut db::Conn) -> Result<String> {
+        let (state, nonce) = state::register_state(conn).await?;
 
         event!(
             Level::DEBUG,
@@ -68,7 +68,7 @@ impl OidcClient {
         &self,
         code: String,
         state: String,
-        mut conn: db::Conn,
+        conn: &mut db::Conn,
     ) -> Result<SessionData> {
         event!(
             Level::DEBUG,
@@ -78,7 +78,7 @@ impl OidcClient {
 
         let (bearer, nonce) = tokio::join!(
             self.0.request_token(&code),
-            state::check_state(&mut conn, &state)
+            state::check_state(conn, &state)
         );
 
         let bearer = bearer?;
@@ -104,7 +104,7 @@ impl OidcClient {
             state
         );
 
-        state::remove_state(&mut conn, &state).await?;
+        state::remove_state(conn, &state).await?;
 
         // Extrait les claims du token validé.
         let claims = id_token.payload()?;

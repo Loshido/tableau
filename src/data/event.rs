@@ -22,7 +22,7 @@ pub struct Event {
 }
 
 impl Event {
-    // create a new event and store it
+    /// creates a new event and store it
     pub async fn create(conn: &mut db::Conn, event: Event) -> Result<String> {
         let event_id = super::random_string(Some(32));
         let key = format!("event:{}", event_id);
@@ -32,7 +32,7 @@ impl Event {
         Ok(event_id)
     }
 
-    // retrieve an event by ID
+    /// retrieves an event by ID
     pub async fn get(conn: &mut db::Conn, event_id: &str) -> Result<Option<Event>> {
         let key = format!("event:{}", event_id);
         let data: Option<String> = conn.get(&key).await?;
@@ -40,7 +40,7 @@ impl Event {
         Ok(data.and_then(|d| serde_json::from_str(&d).ok()))
     }
 
-    // update an existing event
+    /// updates an existing event
     pub async fn update(conn: &mut db::Conn, event_id: &str, event: Event) -> Result<()> {
         let key = format!("event:{}", event_id);
         let serialized = serde_json::to_string(&event)?;
@@ -49,14 +49,14 @@ impl Event {
         Ok(())
     }
 
-    // Delete an event by ID
+    /// deletes an event by ID
     pub async fn delete(conn: &mut db::Conn, event_id: &str) -> Result<()> {
         let key = format!("event:{}", event_id);
         conn.del(&key).await?;
         Ok(())
     }
 
-    // List all events
+    /// lists all events
     pub async fn list(conn: &mut db::Conn) -> Result<Vec<(String, Event)>> {
         let keys: Vec<String> = conn.keys("event:*").await?;
         let mut events = Vec::new();

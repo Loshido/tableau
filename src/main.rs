@@ -30,8 +30,8 @@ async fn main() -> Result<()> {
     };
 
     let router = axum::Router::new()
-        .route("/auth/google", get(api::redirect))
-        .route("/auth/verify", get(api::verify))
+        .route("/auth/google", get(api::auth::redirect))
+        .route("/auth/verify", get(api::auth::verify))
         .with_state(shared_state)
         .fallback_service(web::web_service());
 

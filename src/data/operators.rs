@@ -25,7 +25,8 @@ impl OperatorLevel {
 }
 
 impl Operators {
-    // insert operator in org with a given level
+    /// inserts or overwrite operator in org with a given level
+    /// (only level can be overwrite)
     pub async fn set(
         conn: &mut db::Conn,
         email: String,
@@ -44,6 +45,7 @@ impl Operators {
         Ok(u)
     }
 
+    /// checks the operator level for a given email and org
     pub async fn check(
         conn: &mut db::Conn,
         email: String,
@@ -58,6 +60,7 @@ impl Operators {
         Ok(level)
     }
 
+    /// lists all operators within an org
     pub async fn list(conn: &mut db::Conn, org: String) -> Result<Vec<(String, OperatorLevel)>> {
         let hash = format!("org-ops:{}", org);
         let keys = conn.hgetall(hash).await?;
@@ -73,6 +76,7 @@ impl Operators {
         Ok(operators)
     }
 
+    /// removes an operator from an org
     pub async fn del(conn: &mut db::Conn, email: String, org: String) -> Result<usize> {
         let key = format!("org-ops:{}", org);
         let u = conn.hdel(key, email).await?;

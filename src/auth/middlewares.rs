@@ -12,6 +12,9 @@ pub struct Authentificated {
     pub email: String,
 }
 
+/// checks if request is authentificated,
+/// inserts Authentificated extension for authentificated requests
+/// and returns UNAUTHORIZED for unauthentificated users
 pub async fn check_authentification(
     State(mut handle): State<SharedHandle>,
     mut req: Request,
