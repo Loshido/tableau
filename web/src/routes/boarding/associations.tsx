@@ -43,7 +43,7 @@ export default () => {
 	}
 
     return <div class="bg-papier min-h-screen w-screen flex flex-col items-center justify-center relative overflow-hidden">
-        <Header logo_href="/auth" className="border-b-2 border-ink bg-papier absolute top-0 left-0 z-10"
+        <Header logo_href="/dash/discover" className="border-b-2 border-ink bg-papier absolute top-0 left-0 z-10"
             links={[
                 {
                     titre: "Ignorer",

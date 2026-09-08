@@ -11,9 +11,10 @@ export default () => <div class="bg-papier min-h-screen w-screen">
     <Header
         className="bg-orange border-b-2 border-ink"
         links={[
-            {
+			{
+				rel: "external",
                 titre: "Espace authentifié",
-                href: "/auth",
+                href: "/auth/branch",
                 className: "bg-papier text-ink"
             }
         ]}/>

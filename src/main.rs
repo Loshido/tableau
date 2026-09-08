@@ -1,5 +1,4 @@
 use anyhow::{Context, Result};
-use axum::routing::get;
 
 mod api;
 pub mod auth;
@@ -30,8 +29,7 @@ async fn main() -> Result<()> {
     };
 
     let router = axum::Router::new()
-        .route("/auth/google", get(api::auth::redirect))
-        .route("/auth/verify", get(api::auth::verify))
+        .nest("/auth", api::auth::routes())
         .with_state(shared_state)
         .fallback_service(web::web_service());
 

@@ -7,7 +7,8 @@ interface HeaderProps {
     links: {
         titre: string,
         className?: string,
-        href: string
+		href: string,
+        rel?: string
     }[]
 }
 
@@ -20,7 +21,7 @@ export default function Header(props: HeaderProps) {
         </a>
         <nav class="flex items-center gap-2">
             {
-                props.links.map(link => <a href={link.href} class={`px-4 py-2 ${ link.className || "bg-papier text-ink"}
+                props.links.map(link => <a rel={link.rel} href={link.href} class={`px-4 py-2 ${ link.className || "bg-papier text-ink"}
                     font-mono text-sm uppercase font-normal hover:font-black transition-[font-weight]`}>
                     {link.titre}
                 </a>)

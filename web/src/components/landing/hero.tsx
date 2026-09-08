@@ -21,7 +21,7 @@ export default function Hero() {
             Toi, tu regardes <strong>un seul endroit</strong> — et tu ne rates plus rien.
         </p>
 
-        <a href="/auth">
+        <a href="/auth/branch" rel="external" preload={false}>
             <div class="font-display uppercas text-4xl px-4 sm:px-8 py-2.5 sm:py-5
                     bg-ink text-papier select-none w-fit cursor-pointer uppercase
                     font-normal hover:font-black transition-[font-weight]">

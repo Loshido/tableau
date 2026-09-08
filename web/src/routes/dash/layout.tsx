@@ -1,4 +1,4 @@
-import Navigation from "./layout-nav"
+import Navigation, { SessionProvider } from "./layout-nav"
 import { onSettled, ParentProps } from "solid-js";
 import Logo from "~/components/logo/mod"
 
@@ -38,17 +38,19 @@ export default ({ children }: ParentProps) => {
 	})
 
 	return <div class="flex flex-col min-h-svh w-full">
-		<header class="w-full p-4 px-base relative
-	    	flex justify-between flex-wrap gap-2 items-center border-b-2 border-ink bg-orange">
-		    <a href="/dash/discover">
-		        <Logo />
-			</a>
-			<nav class="flex flex-row items-center flex-wrap gap-2 font-mono text-sm uppercase select-none *:z-10" ref={nav}>
-				<div ref={slider} class="opacity-0 cursor-pointer z-0 absolute bg-ink/75
-					pointer-events-none transition-[top,left,width,height,opacity]" />
-			    <Navigation/>
-		    </nav>
-		</header>
-		{children}
+		<SessionProvider>
+			<header class="w-full p-4 px-base relative
+		    	flex justify-between flex-wrap gap-2 items-center border-b-2 border-ink bg-orange">
+			    <a href="/dash/discover">
+			        <Logo />
+				</a>
+				<nav class="flex flex-row items-center flex-wrap gap-2 font-mono text-sm uppercase select-none *:z-10" ref={nav}>
+					<div ref={slider} class="opacity-0 cursor-pointer z-0 absolute bg-ink/75
+						pointer-events-none transition-[top,left,width,height,opacity]" />
+				    <Navigation/>
+			    </nav>
+			</header>
+			{children}
+		</SessionProvider>
 	</div>
 }
