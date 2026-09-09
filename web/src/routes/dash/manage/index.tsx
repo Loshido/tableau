@@ -42,10 +42,6 @@ export default () => {
 
 		<style>{` label:has(input:not(:checked)) + section {display: none} `}</style>
 
-		<input id="event-search" type="search" placeholder="Rechercher, ex: Nuit du code"
-			class="px-4 py-2 border-4 select-none snap-start text-nowrap rounded-none
-			outline-none w-full md:w-1/3 mb-3"/>
-
 		<For each={events()}>
 			{org => <>
 				<Label association={org.org_name}

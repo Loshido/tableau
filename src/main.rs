@@ -34,6 +34,10 @@ async fn main() -> Result<()> {
             "/api/operators",
             api::operators::routes(shared_state.clone()),
         )
+        .nest(
+            "/api/favorites",
+            api::favorites::routes(shared_state.clone()),
+        )
         .nest("/auth", api::auth::routes())
         .with_state(shared_state)
         .fallback_service(web::web_service());

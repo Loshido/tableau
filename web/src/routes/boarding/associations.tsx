@@ -1,3 +1,4 @@
+import { useNavigate } from "@solidjs/router";
 import { createSignal, For } from "solid-js";
 import Header from "~/components/header";
 
@@ -34,6 +35,7 @@ const ASSOCIATIONS: {
 ]
 
 export default () => {
+	const nav = useNavigate()
 	const [interets, setInterets] = createSignal<Set<string>>(new Set())
 
 	const toggleInteret = (interet: string) => {
@@ -68,10 +70,25 @@ export default () => {
 				}
 			</For>
 
-			<a href="/dash/discover" class="px-4 py-2 bg-ink text-papier w-fit mt-8
-				font-mono text-sm uppercase font-normal hover:font-black transition-[font-weight]">
+			<div class="px-4 py-2 bg-ink text-papier w-fit mt-8
+				font-mono text-sm uppercase font-normal hover:font-black transition-[font-weight]"
+				onClick={async () => {
+					const response = await fetch(`/api/favorites`, {
+						method: "POST",
+						credentials: "include",
+						body: [...interets().values()].join(',')
+					})
+
+					if (response.status !== 200) {
+						const url = `/api/favorites`
+						console.error(`POST "${url}" -> ${response.status} ${response.statusText}`)
+						return
+					}
+
+					nav("/dash/discover")
+				}}>
 				Accéder au tableau
-            </a>
+            </div>
 		</div>
     </div>
 }
