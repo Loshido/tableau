@@ -1,4 +1,4 @@
-import { createSignal, For } from "solid-js"
+import { createMemo, createSignal, For } from "solid-js"
 import EventCard from "~/components/event/card"
 
 const CATEGORIES = [
@@ -57,6 +57,14 @@ const EVENEMENTS = [
 
 export default () => {
 	const [selectionCategorie, setSelectionCategorie] = createSignal<number>(0)
+	const events = createMemo<[string, Data.Event][]>(async () => {
+		const response = await fetch("/api/events", {
+			credentials: "include"
+		})
+
+		if (response.status === 200) return await response.json()
+		return []
+	})
 
 	return <main class="w-full h-full bg-papier flex flex-col gap-1 flex-1
 		p-4 px-base lg:py-8">
@@ -91,17 +99,17 @@ export default () => {
 			mb-3"/>
 
 		<section class="grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-4">
-			<For each={EVENEMENTS}>
-				{evenement => <EventCard
-					href={`/dash/events/b?back=/dash/discover`}
-					titre={evenement.titre}
-					date={evenement.date}
-					association={evenement.association}
-					lieu={evenement.lieu}
+			<For each={events()}>
+				{([id, evenement]) => <EventCard
+					href={`/dash/events/${id}`}
+					titre={evenement.title}
+					date={new Date(evenement.date)}
+					association={evenement.org}
+					lieu={evenement.place}
 					status={"Ouvert"}
-					categorie={evenement.categorie}
-					pour_toi={evenement.pour_toi}
-					externe={evenement.externe}
+					categorie={evenement.category}
+					pour_toi={!!Math.round(Math.random())}
+					externe={!!Math.round(Math.random() * 0.5)}
 				/>}
 			</For>
 		</section>

@@ -46,6 +46,10 @@ export const Router = createRouter({
 					component: lazy(() => import("./routes/(manage)/event")),
 				},
 				{
+					path: "/manage/events/new",
+					component: lazy(() => import("./routes/(manage)/new-event")),
+				},
+				{
 					path: "/manage/associations/:id",
 					component: lazy(() => import("./routes/(manage)/association")),
 				},

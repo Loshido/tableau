@@ -1,11 +1,14 @@
 use crate::db;
 use anyhow::Result;
 use redis::AsyncTypedCommands;
+use serde::Serialize;
 
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Copy)]
 pub struct Operators;
+
+#[derive(Clone, Debug, Copy, Serialize)]
 pub enum OperatorLevel {
-    /// Able to scan tickets and list events of its org
+    /// Able to scan tickets
     L1,
     /// L1 + able to create events in its org
     L2,
@@ -14,6 +17,13 @@ pub enum OperatorLevel {
 }
 
 impl OperatorLevel {
+    pub fn to_int(&self) -> u32 {
+        match self {
+            Self::L1 => 1,
+            Self::L2 => 2,
+            Self::L3 => 3,
+        }
+    }
     fn parse(s: &str) -> Option<Self> {
         match s {
             "1" => Some(Self::L1),
@@ -48,8 +58,8 @@ impl Operators {
     /// checks the operator level for a given email and org
     pub async fn check(
         conn: &mut db::Conn,
-        email: String,
-        org: String,
+        email: &str,
+        org: &str,
     ) -> Result<Option<OperatorLevel>> {
         let key = format!("org-ops:{}", org);
         let level = conn

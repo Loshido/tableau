@@ -1,21 +1,43 @@
 import Info from "./info"
 import Cadre, { Resume } from "./cadre"
-import { createMemo, createSignal, lazy, Loading, Show } from "solid-js"
+import { createSignal, createStore, lazy, Loading, Show } from "solid-js"
 import { LoadingPlaceholder } from "~/components/loading"
-import { useNavigate, useParams } from "@solidjs/router"
+import { useNavigate } from "@solidjs/router"
 
 const Editor = lazy(() => import('~/components/editor'))
 
-export default () => {
-	const params = useParams()
-	const nav = useNavigate()
-	const event = createMemo(async () => {
-		const response = await fetch(`/api/events/${params.id}`)
-		if (response.status === 200) {
-			const event = await response.json()
-			return event as Data.Event
+const createEvent = async (event: Data.Event): Promise<{ succeed: string } | { failed: string }> => {
+	if (event.category.length == 0) return { failed: "Vous devez séléctionner une catégorie"}
+	if (event.date < Date.now()) return { failed: "Vous devez séléctionner une date postérieure"}
+	if (event.description.length == 0) return { failed: "Vous devez écrire une description"}
+	if (event.place.length == 0) return { failed: "Vous devez écrire un lieu"}
+	if (event.title.length == 0) return { failed: "Votre évènement doit avoir un titre"}
+	if (event.xp < 0) return { failed: "Le nombre d'xp ne peut être négatif"}
+
+	const response = await fetch("/api/events", {
+		method: "POST",
+		body: JSON.stringify(event),
+		credentials: "include",
+		headers: {
+			"Content-Type": "application/json"
 		}
-		throw nav('/dash/manage')
+	})
+
+	if (response.status === 200) return { succeed: await response.text() }
+	else return { failed: await response.text() }
+}
+
+export default () => {
+	const nav = useNavigate()
+	const [erreur, setErreur] = createSignal("")
+	const [event, setEvent] = createStore<Data.Event>({
+		title: "",
+		category: "Soirées",
+		date: Date.now() + 1000 * 60 * 60 * 24,
+		description: "",
+		place: "",
+		org: "isenengineering",
+		xp: 0
 	})
 	const [editionPage, setEditionPage] = createSignal(false)
 
@@ -33,34 +55,44 @@ export default () => {
 					Cliquer pour modifier les entrées
 				</p>
 				<p class="font-mono leading-5 uppercase text-ink text-xs">
-					0 Entrées modifiées
+					{erreur()}
 				</p>
 			</div>
 			<div class="px-4 py-2 border-4 select-none cursor-pointer font-mono md:font-light uppercase w-fit
 				hover:font-black transition-[font-weight,background-color,color] text-orange hover:bg-orange hover:text-papier border-orange
-				text-sm md:text-base">
-				Enregistrer
+				text-sm md:text-base"
+				onClick={async () => {
+					const response = await createEvent(event)
+					if('succeed' in response) return nav("/dash/manage")
+					if('failed' in response) return setErreur(response.failed)
+				}}>
+				Créer →
 			</div>
 		</div>
 
 		<Cadre
 			out={{
-				setCategory: (category: string) => {},
-				setTitle: (title: string) => {}
+				setCategory: (category: string) => setEvent(ev => ({
+					...ev,
+					category
+				})),
+				setTitle: (title: string) => setEvent(ev => ({
+					...ev,
+					title
+				}))
 			}}
 			in={{
-				organisation: event().org,
-				category: event().category,
-				title: event().title
-			}}/>
+				organisation: event.org,
+				title: event.title,
+				category: event.category
+			}} />
 
 		<section class="flex flex-col-reverse md:flex-row gap-8 h-full">
 			<div class="flex flex-col gap-2 p-4 md:p-8 bg-navy mt-auto md:mt-0">
-				<Info
-					in={{
-						association: event().org,
-						lieu: event().place,
-						date: new Date(event().date),
+				<Info in={{
+						association: event.org,
+						lieu: event.place,
+						date: new Date(event.date),
 						places: 50
 					}} />
 			</div>
@@ -73,17 +105,15 @@ export default () => {
 			</div>
 		</section>
 		<section class="flex flex-col gap-2">
-			<Resume
-				out={{
-					setDescription: (description: string) => {}
+			<Resume out={{
+					setDescription: (description: string) => setEvent(ev => ({
+						...ev,
+						description
+					}))
 				}}
 				in={{
-					description: event().description
-				}}
-				/>
-		</section>
-		<section>
-
+					description: ""
+				}}/>
 		</section>
 		<Show when={editionPage()}>
 			<section>
@@ -108,23 +138,7 @@ export default () => {
 			</div>
 			<div class="px-4 py-2 bg-ink/50 hover:bg-ink text-papier flex flex-row items-center
 				gap-2 cursor-pointer select-none transition-[font-weight,background-color] w-fit"
-				onClick={async () => {
-					const event_id = params.id
-					const response = await fetch("/api/events", {
-						method: "DELETE",
-						credentials: "include",
-						body: JSON.stringify({
-							org: event().org,
-							event_id
-						}),
-						headers: {
-							"Content-Type": "application/json"
-						}
-					})
-
-					if (response.status === 200) throw nav("/dash/manage")
-					// else toast?? to show user the error
-				}}>
+				onClick={() => setEditionPage(true)}>
 				Supprimer l'évènement
 			</div>
 		</section>

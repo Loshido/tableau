@@ -1,34 +1,18 @@
-const EVENEMENTS = [
-	{
-		date: new Date(Date.now() + Math.floor(Math.random() * 1000 * 60 * 60 * 24 * 300)),
-		titre: "Weekend d'intégration",
-		association: "bde",
-		lieu: "Parc du lac",
-		status: "ouvert",
-		categorie: "Soirées"
-	},
-	{
-		date: new Date(Date.now() + Math.floor(Math.random() * 1000 * 60 * 60 * 24 * 300)),
-		titre: "Forum Entreprises",
-		association: "promo",
-		lieu: "Niveau 0",
-		status: "inscrit",
-		categorie: "Forums",
-		externe: true
-	},
-	{
-		date: new Date(Date.now() + Math.floor(Math.random() * 1000 * 60 * 60 * 24 * 300)),
-		titre: "Nuit du Code",
-		association: "isenengineering",
-		lieu: "PCM",
-		status: "complet",
-		categorie: "Hackathons",
-		pour_toi: true,
-	}
-]
+import { useNavigate, useParams } from "@solidjs/router"
+import { createMemo } from "solid-js"
 
 export default () => {
-	const event = EVENEMENTS[Math.floor(Math.random() * 3)]
+	const params = useParams()
+	const nav = useNavigate()
+	const event = createMemo(async () => {
+		const event_id = params.id
+		const response = await fetch(`/api/events/${event_id}`)
+		if (response.status !== 200) throw nav("/dash/discover")
+		const event = await response.json()
+
+		return event as Data.Event
+	})
+
 	return <main class="w-full h-full bg-papier flex flex-col gap-8 flex-1
 		p-4 px-base lg:py-8">
 		<a onClick={() => window.history.back()} class="px-4 py-2 border-4 select-none cursor-pointer font-mono md:font-light uppercase w-fit
@@ -39,10 +23,10 @@ export default () => {
 
 	 	<section class="relative p-4 sm:p-6 md:p-8 border-4 border-ink bg-orange flex flex-col">
 			<p class="text-sm font-mono text-ink uppercase leading-2">
-				{ event.categorie } · { event.association }
+				{ event().category } · { event().org }
 			</p>
 			<h2 class="text-4xl sm:text-6xl md:text-8xl font-black text-ink uppercase">
-				{ event.titre }
+				{ event().title }
 			</h2>
 		</section>
 
@@ -62,14 +46,14 @@ export default () => {
 
 				<p class="text-papier/75 font-mono text-sm mt-4">
 					Date : <span class="font-semibold text-orange uppercase">
-						{event.date.toLocaleDateString(undefined, { year: undefined, month: 'short', day: "2-digit" })}
+						{new Date(event().date).toLocaleDateString(undefined, { year: undefined, month: 'short', day: "2-digit" })}
 					</span>
 				</p>
 				<p class="text-papier/75 font-mono text-sm">
-					Lieu : <span class="font-semibold text-papier"> { event.lieu } </span>
+					Lieu : <span class="font-semibold text-papier"> { event().place } </span>
 				</p>
 				<p class="text-papier/75 font-mono text-sm">
-					Organisateur : <span class="font-semibold text-papier uppercase"> { event.association } </span>
+					Organisateur : <span class="font-semibold text-papier uppercase"> { event().org } </span>
 				</p>
 
 				<div class="flex flex-row items-center gap-2 font-mono text-papier text-sm mt-4">

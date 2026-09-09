@@ -29,3 +29,7 @@ pub async fn check_session(session: &str, conn: &mut db::Conn) -> Result<Option<
 
     Ok(email)
 }
+
+pub async fn remove_session(session: &str, conn: &mut db::Conn) -> Result<usize> {
+    Ok(conn.hdel("auth-session", session).await?)
+}

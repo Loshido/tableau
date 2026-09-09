@@ -29,6 +29,11 @@ async fn main() -> Result<()> {
     };
 
     let router = axum::Router::new()
+        .nest("/api/events", api::events::routes(shared_state.clone()))
+        .nest(
+            "/api/operators",
+            api::operators::routes(shared_state.clone()),
+        )
         .nest("/auth", api::auth::routes())
         .with_state(shared_state)
         .fallback_service(web::web_service());

@@ -3,8 +3,6 @@ use axum_extra::extract::CookieJar;
 
 use crate::{SharedHandle, auth, data};
 
-/// redirects to identity provider with a state and configured settings
-/// if authentificated redirects to dashboard
 pub async fn handle(
     State(mut handle): State<SharedHandle>,
     cookies: CookieJar,

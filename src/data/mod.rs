@@ -9,6 +9,7 @@ mod user;
 
 pub use event::Event;
 pub use favorites::Favorites;
+pub use operators::OperatorLevel;
 pub use operators::Operators;
 pub use organisation::Organisation;
 pub use user::User;

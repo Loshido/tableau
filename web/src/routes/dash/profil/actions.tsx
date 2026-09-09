@@ -12,8 +12,8 @@ export default () => <>
 		items-center gap-2 cursor-pointer select-none transition-[font-weight,background-color]">
 		Mes données <sup class="uppercase font-black">todo</sup>
 	</a>
-	<a class="px-4 py-2 bg-ink/50 hover:bg-ink text-papier flex flex-row items-center gap-2
+	<a href="/auth/logout" rel="external" preload={false} class="px-4 py-2 bg-ink/50 hover:bg-ink text-papier flex flex-row items-center gap-2
 		cursor-pointer select-none transition-[font-weight,background-color]">
-		Déconnexion <sup class="uppercase font-black">todo</sup>
+		Déconnexion
 	</a>
 </>
