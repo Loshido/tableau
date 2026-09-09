@@ -1,4 +1,4 @@
-export default () => <>
+export default (props: { org_id: string }) => <>
 	<a href="/dash/manage/events/new"
 		class="px-4 py-2 h-fit border-2 border-navy cursor-pointer transition-[translate,box-shadow]
 			hover:-translate-1 hover:shadow-[6px_6px_0_var(--color-ink)]
@@ -15,7 +15,7 @@ export default () => <>
 			Participants<sup class="uppercase font-black">todo</sup>
 		</p>
 	</a>
-	<a href="/dash/manage/associations/a"
+	<a href={`/dash/manage/associations/${props.org_id}`}
 		class="px-4 py-2 h-fit border-2 border-navy cursor-pointer transition-[translate,box-shadow]
 			hover:-translate-1 hover:shadow-[6px_6px_0_var(--color-ink)]
 			flex flex-col gap-2 items-center justify-center">
@@ -23,7 +23,7 @@ export default () => <>
 			Modifier la vitrine
 		</p>
 	</a>
-	<a href="/dash/manage/associations/operators/a"
+	<a href={`/dash/manage/associations/operators/${props.org_id}`}
 		class="px-4 py-2 h-fit border-2 border-navy cursor-pointer transition-[translate,box-shadow]
 			hover:-translate-1 hover:shadow-[6px_6px_0_var(--color-ink)]
 			flex flex-col gap-2 items-center justify-center">

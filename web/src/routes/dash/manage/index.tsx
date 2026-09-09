@@ -66,7 +66,7 @@ export default () => {
 						/>}
 					</For>
 					<div class="flex flex-col gap-4">
-						<Actions/>
+						<Actions org_id={org.org_id} />
 					</div>
 				</section>
 			</>}

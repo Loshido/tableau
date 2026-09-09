@@ -6,7 +6,7 @@ use serde::Serialize;
 #[derive(Clone, Debug, Copy)]
 pub struct Operators;
 
-#[derive(Clone, Debug, Copy, Serialize)]
+#[derive(Clone, Debug, Copy)]
 pub enum OperatorLevel {
     /// Able to scan tickets
     L1,
@@ -14,6 +14,19 @@ pub enum OperatorLevel {
     L2,
     /// L2 + able to manage org's operators + org's page
     L3,
+}
+
+impl Serialize for OperatorLevel {
+    fn serialize<S>(&self, serializer: S) -> std::prelude::v1::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        match self {
+            OperatorLevel::L1 => serializer.serialize_u32(1),
+            OperatorLevel::L2 => serializer.serialize_u32(2),
+            OperatorLevel::L3 => serializer.serialize_u32(3),
+        }
+    }
 }
 
 impl OperatorLevel {
