@@ -49,6 +49,7 @@ const EVENEMENTS = [
 export default () => {
 	return <main class="w-full h-full bg-papier flex flex-col gap-1 flex-1
 		p-4 px-base lg:py-8">
+		<div class="mb-8 font-black px-2 w-fit py-0.5 bg-fuchsia-300 text-fuchsia-600 border-fuchsia-600 border-4">TODO</div>
 		<section class="mb-3">
 			<p class="font-mono leading-2 uppercase font-light text-orange text-sm">
 				TON ESPACE

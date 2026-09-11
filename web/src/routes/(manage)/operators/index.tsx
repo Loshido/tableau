@@ -141,7 +141,18 @@ export default () => {
 			<hr class="mb-8 border-2 border-ink/20" />
 			<div class="px-4 py-2 bg-ink/50 hover:bg-ink text-papier flex flex-row
 				items-center gap-2 cursor-pointer select-none w-fit font-mono text-sm
-				transition-[font-weight,background-color] uppercase">
+				transition-[font-weight,background-color] uppercase"
+				onClick={() => {
+					let csv = `email,niveau\n`
+					operators().forEach((op) => csv += op.join(',') + '\n')
+
+					const link = document.createElement('a');
+				    link.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+				    link.target = '_blank';
+				    link.download = `operateurs-${ params.id }.csv`;
+				    link.click();
+				}}>
+
 				Exporter la liste des administrateurs (.CSV)
 			</div>
 		</section>

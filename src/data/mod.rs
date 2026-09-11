@@ -4,15 +4,15 @@ use rand::fill;
 mod event;
 mod favorites;
 mod operators;
-mod organisation;
-mod user;
+mod orgs;
+mod users;
 
 pub use event::Event;
 pub use favorites::Favorites;
 pub use operators::OperatorLevel;
 pub use operators::Operators;
-pub use organisation::Organisation;
-pub use user::User;
+pub use orgs::Organisation;
+pub use users::User;
 
 fn random_string(n: Option<usize>) -> String {
     let mut bytes = vec![0u8; n.unwrap_or(32)];

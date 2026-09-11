@@ -34,6 +34,7 @@ async fn main() -> Result<()> {
             "/api/operators",
             api::operators::routes(shared_state.clone()),
         )
+        .nest("/api/orgs", api::orgs::routes(shared_state.clone()))
         .nest(
             "/api/favorites",
             api::favorites::routes(shared_state.clone()),

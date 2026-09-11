@@ -4,7 +4,7 @@ export default (props: { org_id: string }) => <>
 			hover:-translate-1 hover:shadow-[6px_6px_0_var(--color-ink)]
 			flex flex-col gap-2 items-center justify-center">
 		<p class="font-bold font-display text-xl leading-8">
-			Planifier un évènement<sup class="uppercase font-black">todo</sup>
+			Planifier un évènement
 		</p>
 	</a>
 	<a
@@ -12,7 +12,7 @@ export default (props: { org_id: string }) => <>
 			hover:-translate-1 hover:shadow-[6px_6px_0_var(--color-ink)]
 			flex flex-col gap-2 items-center justify-center">
 		<p class="font-bold font-display text-xl leading-8">
-			Participants<sup class="uppercase font-black">todo</sup>
+			Participants<sup class="uppercase font-black text-fuchsia-600">todo</sup>
 		</p>
 	</a>
 	<a href={`/dash/manage/associations/${props.org_id}`}
@@ -20,7 +20,7 @@ export default (props: { org_id: string }) => <>
 			hover:-translate-1 hover:shadow-[6px_6px_0_var(--color-ink)]
 			flex flex-col gap-2 items-center justify-center">
 		<p class="font-bold font-display text-xl leading-8">
-			Modifier la vitrine
+			Modifier la vitrine<sup class="uppercase font-black text-fuchsia-600">todo</sup>
 		</p>
 	</a>
 	<a href={`/dash/manage/associations/operators/${props.org_id}`}

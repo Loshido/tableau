@@ -30,12 +30,16 @@ export default (props: { out: Out, in: In }) => {
 				</select>
 			</label> · { props.in.organisation }
 		</p>
-		<textarea class="text-4xl sm:text-6xl md:text-8xl font-black text-ink uppercase h-full
+		<div class="text-4xl sm:text-6xl md:text-8xl font-black text-ink uppercase h-full
 			outline-none resize-none w-full placeholder:text-ink/50 placeholder:uppercase"
-			onInput={e => props.out.setTitle(e.target.value)}
-			value={props.in.title}
-			placeholder="Titre de l'évènement">
-		</textarea>
+			onInput={e => {
+				const target = e.target as HTMLDivElement
+				if (target.innerText.length === 0) props.out.setTitle("Titre de l'évènement")
+				else props.out.setTitle(target.innerText)
+			}}
+			innerText="Titre de l'évènement" contenteditable="true">
+			{/*placeholder="Titre de l'évènement">*/}
+		</div>
 	</section>
 }
 

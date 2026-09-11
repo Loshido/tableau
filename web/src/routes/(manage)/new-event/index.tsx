@@ -98,6 +98,7 @@ export default () => {
 			</div>
 			<div class="border-4 border-ink w-full hover:bg-orange/10 transition-colors
 				flex flex-col items-center justify-center relative cursor-pointer select-none aspect-5/2">
+				<div class="mb-8 font-black w-fit text-fuchsia-600 text-xl absolute top-2 left-2">TODO</div>
 				<div class="font-display text-ink leading-8 font-black text-2xl uppercase">
 					Charger une miniature
 				</div>
@@ -105,15 +106,20 @@ export default () => {
 			</div>
 		</section>
 		<section class="flex flex-col gap-2">
-			<Resume out={{
-					setDescription: (description: string) => setEvent(ev => ({
+			<h2 class="font-display leading-8 font-black text-2xl uppercase h-fit">
+				À propos de l'évènement (court)
+			</h2>
+			<div class="outline-none font-display text-ink w-full h-full relative group
+				text-2xl flex-10" contenteditable="true"
+				onInput={e => {
+					const target = e.target as HTMLDivElement;
+					setEvent(ev => ({
 						...ev,
-						description
+						description: target.innerText
 					}))
-				}}
-				in={{
-					description: ""
-				}}/>
+				}}>
+					Un résumé de l'évènement pour la page d'accueil, le future, les nouveaux, les externes, vos successeurs...
+			</div>
 		</section>
 		<Show when={editionPage()}>
 			<section>
@@ -129,17 +135,12 @@ export default () => {
 			<hr class="mb-8 border-2"/>
 			<div class="px-4 py-2 bg-ink/50 hover:bg-ink text-papier flex flex-row items-center
 				gap-2 cursor-pointer select-none transition-[font-weight,background-color] w-fit">
-				Personnalier les couleurs de l'évènement
+				Personnaliser les couleurs de l'évènement
 			</div>
 			<div class="px-4 py-2 bg-ink/50 hover:bg-ink text-papier flex flex-row items-center
 				gap-2 cursor-pointer select-none transition-[font-weight,background-color] w-fit"
-				onClick={() => setEditionPage(true)}>
+				onClick={() => setEditionPage(!editionPage())}>
 				Page dédiée pour l'évènement (images, vidéos, titres, textes...)
-			</div>
-			<div class="px-4 py-2 bg-ink/50 hover:bg-ink text-papier flex flex-row items-center
-				gap-2 cursor-pointer select-none transition-[font-weight,background-color] w-fit"
-				onClick={() => setEditionPage(true)}>
-				Supprimer l'évènement
 			</div>
 		</section>
 	</main>

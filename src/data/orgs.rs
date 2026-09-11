@@ -15,8 +15,8 @@ pub struct Organisation {
 
 impl Organisation {
     /// creates or overwrite a new org and store it
-    pub async fn create(conn: &mut db::Conn, org: Organisation) -> Result<String> {
-        let key = format!("org:{}", org.name);
+    pub async fn set(conn: &mut db::Conn, org_id: &str, org: Organisation) -> Result<String> {
+        let key = format!("org:{}", org_id);
         let serialized = serde_json::to_string(&org)?;
 
         conn.set(&key, serialized).await?;
@@ -24,16 +24,16 @@ impl Organisation {
     }
 
     /// retrieves an org by id
-    pub async fn get(conn: &mut db::Conn, name: &str) -> Result<Option<Organisation>> {
-        let key = format!("org:{}", name);
+    pub async fn get(conn: &mut db::Conn, org_id: &str) -> Result<Option<Organisation>> {
+        let key = format!("org:{}", org_id);
         let data: Option<String> = conn.get(&key).await?;
 
         Ok(data.and_then(|d| serde_json::from_str(&d).ok()))
     }
 
     /// deletes an org by id
-    pub async fn delete(conn: &mut db::Conn, name: &str) -> Result<()> {
-        let key = format!("org:{}", name);
+    pub async fn delete(conn: &mut db::Conn, org_id: &str) -> Result<()> {
+        let key = format!("org:{}", org_id);
         conn.del(&key).await?;
         Ok(())
     }
@@ -44,11 +44,17 @@ impl Organisation {
         let mut orgs = Vec::new();
 
         for key in keys {
-            if let Some(data) = conn.get(&key).await? {
-                if let Ok(org) = serde_json::from_str::<Organisation>(&data) {
-                    let name = key.strip_prefix("org:").unwrap_or("").to_string();
-                    orgs.push((name, org));
+            let org = conn
+                .get(&key)
+                .await?
+                .and_then(|data| Some(serde_json::from_str::<Organisation>(&data)));
+
+            match org {
+                Some(Ok(org)) => {
+                    let org_id = key.strip_prefix("org:").unwrap_or("").to_string();
+                    orgs.push((org_id, org));
                 }
+                _ => {}
             }
         }
 
